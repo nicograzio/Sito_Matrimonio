@@ -52,3 +52,7 @@ document.querySelector('.menu-toggle').addEventListener('click', function() {
     this.classList.toggle('active');
     document.querySelector('nav ul').classList.toggle('show');
 });
+
+// Autoplay video
+var video = document.getElementById('bg-video');
+video.play();
