@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrimonio Nicholas & Carlotta</title>
+    <!-- Favicon - Logo del Matrimonio -->
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+</head>
+
+<body>
+	<!-- Navigation Bar - responsive -->
+    <nav>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+		<<div class="menu-toggle">
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
+		</div>
+        <ul>
+            <li><a href="#home" class="active">Home</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#details">Dettagli</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#rsvp">RSVP</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#donations">Donazioni</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#location">Location</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#gallery">Galleria</a></li>
+			<hr style="color: #fff; width: 50%;">
+            <li><a href="#contacts">Contatti</a></li>
+        </ul>
+    </nav>
+
+	<!-- Home - video e countdown -->
+    <section id="home">
+        <video autoplay muted loop id="bg-video">
+            <source src="video.mp4" type="video/mp4">
+            Il tuo browser non supporta i video HTML5.
+        </video>
+        <div class="overlay">
+            <!-- <h1>Il Matrimonio di Nicholas e Carlotta</h1> -->
+            <div id="countdown">
+					<p id="time"></p>
+            </div>
+        </div>
+		<div class="foot-overlay2"></div>
+    </section>
+
+	<!-- Dettagli - Programma del matrimonio con orari e descrizioni -->
+    <section id="details">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Dettagli della Giornata</h2>
+			<p>Orari di arrivo, programma, menu e altre informazioni.</p>
+		</div>
+		<div class="foot-overlay1"></div>
+    </section>
+
+	<!-- Prenotazione - Gli ospiti potranno inviarci la loro presenza -->
+    <section id="rsvp">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Conferma la tua partecipazione</h2>
+			<form action="#">
+				<label for="name">Nome e Cognome:</label>
+				<input type="text" id="name" name="name" required>
+
+				<label for="guests">Numero di invitati:</label>
+				<input type="number" id="guests" name="guests" required>
+
+				<label for="notes">Richieste o Note particolari:</label>
+				<textarea id="notes" name="notes"></textarea>
+
+				<button type="submit">Conferma</button>
+			</form>
+		</div>
+		<div class="foot-overlay2"></div>
+    </section>
+
+	<!-- Donazione - Pagina che riporta il nostro IBAN per donazione (aggiungere evenntuale lista nozze) -->
+    <section id="donations">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Donazioni e Regali</h2>
+			<p>Se desiderate farci un regalo, potete contribuire con una donazione al seguente IBAN:</p>
+			<p><strong>IBAN: IT00A1234567890123456789012</strong></p>
+		</div>
+    <div class="foot-overlay1"></div>
+	</section>
+
+    <section id="location">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Location della Cerimonia</h2>
+			<p>La cerimonia e il ricevimento si terranno presso:</p>
+			<p><strong>Corte di Villa Spalletti: Via Franceschini, 11, 42013 San Donnino di Liguria RE</strong></p>
+			<div id="map" style="padding-top: 15px;">
+				<div class="mapouter">
+					<div class="gmap_canvas">
+						<iframe width="100%" height="560" id="gmap_canvas" src="https://maps.google.com/maps?q=corte+di+villa+spalletti&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+    <div class="foot-overlay2"></div>
+	</section>
+
+    <section id="gallery">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Galleria di Immagini</h2>
+			<p>Carica le tue foto o scarica quelle degli altri invitati:</p>
+			<div class="gallery">
+				<div class="image-container">
+					<img src="logo 1.webp" alt="Foto 1">
+				</div>
+				<div class="image-container">
+					<img src="logo 1.webp" alt="Foto 2">
+				</div>
+				<!-- Aggiungi più immagini qui -->
+			</div>
+			<form action="#" method="POST" enctype="multipart/form-data">
+				<input type="file" name="image" accept="image/*">
+				<button type="submit">Carica Foto</button>
+			</form>
+		</div>
+    <div class="foot-overlay1"></div>
+	</section>
+
+    <section id="contacts">
+		<img class="logo-image" src="logo.png">
+		<div class="content">
+			<h2>Contatti</h2>
+			<p>Per qualsiasi problema, intolleranza o richiesta, contattateci:</p>
+			<ul>
+				<li>Telefono Nicholas: +39 3387747479</li>
+				<li>Telefono Carlotta: +39 3934455956</li>
+				<li>Email: <a href="mailto:nicholasgrazioli@hotmail.it">nicholasgrazioli@hotmail.it</a></li>
+				<li>Email: <a href="mailto:carlottadaviddi@gmail.com">carlottadaviddi@gmail.com</a></li>
+			</ul>
+		</div>
+		<div class="foot-overlay2"></div>
+	</section>
+
+    <script src="script.js"></script>
+</body>
+</html>
