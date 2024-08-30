@@ -73,3 +73,35 @@ document.getElementById('Prenotazione').addEventListener('submit', async functio
     alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
   }
 });
+
+// Invio delle foto dal form nella gallery
+document.getElementById('upload-form').addEventListener('submit', async function(event) {
+event.preventDefault();
+
+const fileInput = document.getElementById('file');
+const file = fileInput.files[0];
+const reader = new FileReader();
+
+reader.onload = async function() {
+const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
+
+try {
+  const response = await fetch('/.netlify/functions/upload-to-github', {
+    method: 'POST',
+    body: JSON.stringify({
+      fileName: file.name,
+      fileContent: fileContent,
+    }),
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  const result = await response.json();
+  document.getElementById('upload-status').innerText = result.message;
+} catch (error) {
+  document.getElementById('upload-status').innerText = 'Errore nel caricamento su GitHub.';
+  console.error('Errore:', error);
+}
+};
+
+reader.readAsDataURL(file);
+});
