@@ -58,7 +58,7 @@ var video = document.getElementById('bg-video');
 video.play();
 
 // Invio dati del form per la prenotazione
-document.getElementById('Prenotazione').addEventListener('submit', async function(e) {
+/*document.getElementById('Prenotazione').addEventListener('submit', async function(e) {
   e.preventDefault(); // Previene il comportamento predefinito di invio del form
   const formData = new FormData(this); // Cattura i dati del form
   const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit', {
@@ -72,7 +72,7 @@ document.getElementById('Prenotazione').addEventListener('submit', async functio
   } else {
     alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
   }
-});
+});*/
 
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
