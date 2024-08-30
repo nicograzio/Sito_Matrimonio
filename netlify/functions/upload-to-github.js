@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
   const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
   const filePath = 'images/${fileName}'; // Specifica il percorso del file nel repo
 
-  const githubApiUrl = 'https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}';
+  const githubApiUrl = 'https://api.github.com/repos/${repoOwner}/${repoName}/${filePath}';
 
   const requestBody = {
     message: 'Aggiunto nuovo file',  // Messaggio di commit per il caricamento del file
