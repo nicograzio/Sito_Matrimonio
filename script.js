@@ -77,14 +77,14 @@ document.getElementById('Prenotazione').addEventListener('submit', async functio
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
 event.preventDefault();
-
+console.log('Modulo inviato');
 const fileInput = document.getElementById('file');
 const file = fileInput.files[0];
 const reader = new FileReader();
 
 reader.onload = async function() {
 const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
-
+console.log('Contenuto del file caricato:', fileContent.slice(0,20)+('...');
 try {
   const response = await fetch('/.netlify/functions/upload-to-github', {
     method: 'POST',
@@ -94,6 +94,7 @@ try {
     }),
     headers: { 'Content-Type': 'application/json' }
   });
+console.log('Risposta del server:', response);
 
   const result = await response.json();
   document.getElementById('upload-status').innerText = result.message;
