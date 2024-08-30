@@ -84,7 +84,7 @@ const reader = new FileReader();
 
 reader.onload = async function() {
 const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
-console.log('Contenuto del file caricato:', fileContent.slice(0,20)+('...');
+console.log('Contenuto del file caricato:', { filename, fileContent: fileContent.slice(0,20) + '...'});
 try {
   const response = await fetch('/.netlify/functions/upload-to-github', {
     method: 'POST',
