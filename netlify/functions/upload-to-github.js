@@ -86,6 +86,9 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Codice per l'invio della mail di notifica al mio indirizzo mail
+  
+
   return {
     statusCode: 200,
     headers: {
