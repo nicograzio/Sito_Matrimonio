@@ -75,33 +75,66 @@ video.play();
 });*/
 
 // Invio delle foto dal form nella gallery
+/*document.getElementById('upload-form').addEventListener('submit', async function(event) {
+	event.preventDefault();
+	console.log('Modulo inviato');
+	const fileInput = document.getElementById('file');
+	const file = fileInput.files[0];
+	const reader = new FileReader();
+	
+	reader.onload = async function() {
+	const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
+	try {
+	  const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
+	    method: 'POST',
+	    body: JSON.stringify({
+	      fileName: file.name,
+	      fileContent: fileContent,
+	    }),
+	    headers: { 'Content-Type': 'application/json' }
+	  });
+	console.log('Risposta del server:', response);
+	
+	  const result = await response.json();
+	  document.getElementById('upload-status').innerText = result.message;
+	} catch (error) {
+	  document.getElementById('upload-status').innerText = 'Errore nel caricamento su GitHub.';
+	  console.error('Errore:', error);
+	}
+};*/
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
-event.preventDefault();
-console.log('Modulo inviato');
-const fileInput = document.getElementById('file');
-const file = fileInput.files[0];
-const reader = new FileReader();
+	event.preventDefault();
+	console.log('Modulo inviato');
+	const files = document.getElementById('file').files;
+	const fileArray = [];
+	
+	for (let i = 0; i < files.length; i++) {
+		const fileContent = await toBase64(files[i]);
+		fileArray.push({
+		    fileContent,
+		    fileName: files[i].name
+		});
+	}
+	try {
+	const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
+	    method: 'POST',
+	    body: JSON.stringify({ files: fileArray }),
+	    headers: { 'Content-Type': 'application/json' }
+	});
+	
+	const result = await response.json();
+	document.getElementById('upload-status').innerText = result.message;
+	} catch (error) {
+	  document.getElementById('upload-status').innerText = 'Errore nel caricamento su GitHub.';
+	  console.error('Errore:', error);
+	}
 
-reader.onload = async function() {
-const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
-try {
-  const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
-    method: 'POST',
-    body: JSON.stringify({
-      fileName: file.name,
-      fileContent: fileContent,
-    }),
-    headers: { 'Content-Type': 'application/json' }
-  });
-console.log('Risposta del server:', response);
-
-  const result = await response.json();
-  document.getElementById('upload-status').innerText = result.message;
-} catch (error) {
-  document.getElementById('upload-status').innerText = 'Errore nel caricamento su GitHub.';
-  console.error('Errore:', error);
-}
+	function toBase64(file) {
+	    return new Promise((resolve, reject) => {
+	        const reader = new FileReader();
+	        reader.readAsDataURL(file);
+	        reader.onload = () => resolve(reader.result.split(',')[1]);
+	        reader.onerror = error => reject(error);
+	    });
+	}
 };
-
-reader.readAsDataURL(file);
-});
