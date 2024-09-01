@@ -1,10 +1,27 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {  
+  // Gestisci la richiesta preflight (OPTIONS)
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',  // Permette richieste da qualsiasi origine
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',  // Permette gli header necessari
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'  // Metodi permessi
+      },
+      body: '',  // Nessun corpo per la risposta preflight
+    };
+  }
+
+  // Controlla se il metodo non è POST
   if (event.httpMethod !== 'POST') {
     console.log('Metodo non consentito');
     return {
       statusCode: 405,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({ message: 'Metodo non consentito' }),
     };
   }
@@ -59,6 +76,9 @@ exports.handler = async (event, context) => {
   if (errors.length > 0) {
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({ 
         message: 'Errore nel caricamento di uno o più file.',
         details: errors
@@ -68,6 +88,9 @@ exports.handler = async (event, context) => {
 
   return {
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     body: JSON.stringify({ 
       message: 'File caricati con successo!<br>Le foto saranno disponibili nella galleria non appena le avremo controllate.',
       details: uploadResults
