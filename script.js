@@ -137,4 +137,4 @@ document.getElementById('upload-form').addEventListener('submit', async function
 	        reader.onerror = error => reject(error);
 	    });
 	}
-};
+});
