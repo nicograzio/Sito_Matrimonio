@@ -85,7 +85,7 @@ const reader = new FileReader();
 reader.onload = async function() {
 const fileContent = reader.result.split(',')[1]; // Ottieni il contenuto del file in Base64
 try {
-  const response = await fetch('/.netlify/functions/upload-to-github', {
+  const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
     method: 'POST',
     body: JSON.stringify({
       fileName: file.name,
