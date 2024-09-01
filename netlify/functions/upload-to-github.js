@@ -92,7 +92,7 @@ exports.handler = async (event, context) => {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({ 
-      message: 'File caricati con successo!<br>Le foto saranno disponibili nella galleria non appena le avremo controllate.',
+      message: 'File caricati con successo! Le foto saranno disponibili nella galleria non appena le avremo controllate.',
       details: uploadResults
     }),
   };
