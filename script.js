@@ -95,13 +95,13 @@ document.getElementById('upload-form').addEventListener('submit', async function
 	});
 	
 	const result = await response.json();
-	alert('Caricamento avvenuto con successo!');
 	document.getElementById('upload-status').innerText = result.message;
 	} catch (error) {
 		alert('Errore nel caricamento! Ti preghiamo di riprovare più tardi.\nNel caso il problema persista puoi contattare Nicholas.');
 		document.getElementById('upload-status').innerText = 'Errore nel caricamento delle foto';
 		console.error('Errore:', error);
 	}
+	alert('Caricamento avvenuto con successo!');
 
 	function toBase64(file) {
 	return new Promise((resolve, reject) => {
