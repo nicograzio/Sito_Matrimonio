@@ -1,7 +1,9 @@
 const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
 
+// Handler principale dell'evento Lambda
 exports.handler = async (event, context) => {
+  // Gestione delle richieste OPTIONS per il CORS
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -14,6 +16,7 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Verifica che il metodo HTTP sia POST, altrimenti ritorna un errore 405
   if (event.httpMethod !== 'POST') {
     console.log('Metodo non consentito');
     return {
@@ -25,48 +28,24 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Estrazione del token GitHub e dei dati dall'evento
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   const { files, deviceName } = JSON.parse(event.body);
   const repoOwner = 'nicograzio';
   const repoName = 'Sito_Matrimonio';
 
-  const getFileSha = async (githubApiUrl) => {
-    try {
-      const response = await fetch(githubApiUrl, {
-        method: 'GET',
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        return data.sha;
-      }
-    } catch (error) {
-      console.error('Errore nel recupero dello SHA del file:', error.message);
-    }
-    return null;
-  };
-
   let uploadResults = [];
 
-  for (let i = 0; i < files.length; i++) {
-    const { fileContent, fileName } = files[i];
-    const timestamp = Date.now();
-    const uniqueFileName = `${timestamp}_${fileName}`;
-    const filePath = `images/${uniqueFileName}`;
+  // Loop per caricare i file su GitHub
+  for (const { fileContent, fileName } of files) {
+    const filePath = `images/${fileName}`;
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-    const sha = await getFileSha(githubApiUrl);
 
     const requestBody = {
-      message: `Aggiunto nuovo file: ${uniqueFileName}`,
+      message: `Aggiunto nuovo file: ${fileName}`,
       content: Buffer.from(fileContent, 'base64').toString('base64'),
-      sha,
+      // Lo SHA non è necessario dato che i file sono sempre univoci
     };
-
-    console.log(`Caricamento del file ${uniqueFileName} all'URL: ${githubApiUrl}`);
-    console.log(`Corpo della richiesta: ${JSON.stringify(requestBody)}`);
 
     try {
       const response = await fetch(githubApiUrl, {
@@ -79,21 +58,21 @@ exports.handler = async (event, context) => {
       });
 
       const responseBody = await response.json();
-      console.log('Risposta API GitHub:', responseBody);
 
       if (!response.ok) {
-        console.error(`Errore nel caricamento del file ${uniqueFileName}: ${response.status} ${response.statusText}`);
+        console.error(`Errore nel caricamento del file ${fileName}: ${response.status} ${response.statusText}`);
         console.error('Dettagli della risposta:', responseBody);
-        throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.status} ${response.statusText}`);
+        throw new Error(`Errore nel caricamento del file ${fileName}: ${response.status} ${response.statusText}`);
       }
 
-      uploadResults.push({ fileName: uniqueFileName, status: 'success' });
+      uploadResults.push({ fileName, status: 'success' });
     } catch (error) {
-      console.error('Errore:', error.message);
-      uploadResults.push({ fileName: uniqueFileName, status: 'error', message: error.message });
+      console.error(`Errore nel caricamento del file ${fileName}:`, error.message);
+      uploadResults.push({ fileName, status: 'error', message: error.message });
     }
   }
 
+  // Filtra i risultati per individuare eventuali errori
   const errors = uploadResults.filter(result => result.status === 'error');
 
   if (errors.length > 0) {
@@ -109,6 +88,7 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Invia una email di notifica usando nodemailer
   try {
     const transporter = nodemailer.createTransport({
       service: 'hotmail',
@@ -131,6 +111,7 @@ exports.handler = async (event, context) => {
     console.error('Errore nell\'invio della email:', emailError.message);
   }
 
+  // Ritorna una risposta di successo
   return {
     statusCode: 200,
     headers: {
