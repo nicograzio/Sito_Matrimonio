@@ -44,7 +44,6 @@ exports.handler = async (event, context) => {
     const timestamp = Date.now(); // Ottieni il timestamp corrente
     const uniqueFileName = `${timestamp}_${fileName}`; // Crea un nuovo nome file univoco
     const filePath = `images/${uniqueFileName}`; // Specifica il percorso del file nel repo
-    console.log(filePath);
 
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
