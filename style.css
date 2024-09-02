@@ -197,28 +197,33 @@ section {
     color: #333;
 }
 
-.gallery {
+.gallery-content {
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    height: 100vh;
 }
 
-.image-container {
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+.swiper-container {
+    width: 80%;
+    height: 60vh;
 }
 
-.image-container img {
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
+    position: relative;
+}
+
+.swiper-slide img {
     width: 300px;
     height: 200px;
     object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.image-container img:hover {
-    transform: scale(1.1);
+    border-radius: 15px;
 }
 /*-------------------------------------------*/
 
@@ -413,26 +418,6 @@ nav ul hr {
 
 *::-ms-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.6);
-}
-/*-------------------------------------------*/
-
-/* Galleria di immagini scrollabile */
-.swiper-container {
-    width: 80%;
-    height: 60vh;
-}
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
-    position: relative;
-}
-.swiper-slide img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 15px;
 }
 /*-------------------------------------------*/
 
