@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {  
   // Gestisci la richiesta preflight (OPTIONS)
@@ -29,7 +30,7 @@ exports.handler = async (event, context) => {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Usa le variabili di ambiente per sicurezza
   console.log('Token ottenuto:', GITHUB_TOKEN ? 'Si' : 'No');
 
-  const { files } = JSON.parse(event.body); // Recupera l'array di file dal body della richiesta
+  const { files, deviceName } = JSON.parse(event.body); // Recupera l'array di file e il nome del dispositivo dal body della richiesta
   const repoOwner = 'nicograzio'; // Inserisci il tuo nome utente GitHub
   const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
 
@@ -86,16 +87,36 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Codice per l'invio della mail di notifica al mio indirizzo mail
-  
+  // Invia una email di notifica se tutti i file sono stati caricati correttamente
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', // Usa il servizio che preferisci (es: Gmail, SendGrid)
+      auth: {
+        user: process.env.EMAIL_USER, // Usa una variabile di ambiente per l'email
+        pass: process.env.EMAIL_PASS, // Usa una variabile di ambiente per la password
+      },
+    });
 
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_DEST, // Inserisci l'indirizzo email del destinatario
+      subject: 'Nuove foto caricate',
+      text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('Email inviata con successo');
+  } catch (emailError) {
+    console.error('Errore nell\'invio della email:', emailError);
+  }
+  
   return {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({ 
-      message: 'File caricati con successo! Le foto saranno disponibili nella galleria non appena le avremo controllate.',
+      message: 'File caricati con successo!\nLe foto saranno disponibili nella galleria non appena le avremo controllate.',
       details: uploadResults
     }),
   };
