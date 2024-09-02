@@ -82,6 +82,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
 	
 	for (let i = 0; i < files.length; i++) {
 		const fileContent = await toBase64(files[i]);
+		console.log('Contenuto Base64 del file:', fileContent);
 		fileArray.push({
 		    fileContent,
 		    fileName: files[i].name
