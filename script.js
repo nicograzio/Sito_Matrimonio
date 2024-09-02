@@ -105,7 +105,7 @@ var swiper = new Swiper('.swiper-container', {
 	slideShadows: false,
     },
     autoplay: {
-	delay: 3000,  // 3 secondi
+	delay: 0,  // 3 secondi
 	disableOnInteraction: false,  // Continua anche se l'utente interagisce
     },
     on: {
@@ -131,6 +131,7 @@ function updateSwiperSlidesPerView() {
 
 // Aggiungi un listener per l'evento resize della finestra
 window.addEventListener('resize', updateSwiperSlidesPerView);
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
