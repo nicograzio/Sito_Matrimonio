@@ -84,11 +84,10 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		const fileContent = await toBase64(files[i]);
 		const originalName = files[i].name;
 		const newFileName = `${timestamp}_${originalName}`;
-	        return { name, extension };
-			fileArray.push({
-			    fileContent,
-			    fileName: newFileName
-			});
+		fileArray.push({
+		    fileContent,
+		    fileName: newFileName
+		});
 	}
 	try {
 	const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
