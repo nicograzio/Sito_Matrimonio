@@ -27,10 +27,10 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Usa le variabili di ambiente per sicurezza
   console.log('Token ottenuto:', GITHUB_TOKEN ? 'Si' : 'No');
 
-  const { files, deviceName } = JSON.parse(event.body);
+  const { files, deviceName } = JSON.parse(event.body); // Recupera l'array di file e il nome del dispositivo dal body della richiesta
   const repoOwner = 'nicograzio'; // Inserisci il tuo nome utente GitHub
   const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
 
@@ -46,11 +46,13 @@ exports.handler = async (event, context) => {
     const filePath = `images/${uniqueFileName}`; // Specifica il percorso del file nel repo
 
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-
     const requestBody = {
-      message: `Aggiunto nuovo file: ${uniqueFileName}`,
-      content: Buffer.from(fileContent, 'base64').toString('base64'),
+      message: `Aggiunto nuovo file: ${uniqueFileName}`,  // Messaggio di commit per il caricamento del file
+      content: Buffer.from(fileContent, 'base64').toString('base64'),  // Codifica il contenuto del file in base64
     };
+
+    console.log(`Caricamento del file ${uniqueFileName} all'URL: ${githubApiUrl}`);
+    console.log(`Corpo della richiesta: ${JSON.stringify(requestBody)}`);
 
     try {
       const response = await fetch(githubApiUrl, {
@@ -61,6 +63,9 @@ exports.handler = async (event, context) => {
         },
         body: JSON.stringify(requestBody),
       });
+
+      const responseBody = await response.json();
+      console.log('Risposta API:', responseBody);
 
       if (!response.ok) {
         throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.statusText}`);
@@ -96,14 +101,14 @@ exports.handler = async (event, context) => {
     const transporter = nodemailer.createTransport({
       service: 'hotmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER, // Usa una variabile di ambiente per l'email
+        pass: process.env.EMAIL_PASS, // Usa una variabile di ambiente per la password
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_DEST,
+      to: process.env.EMAIL_DEST, // Usa la variabile di ambiente per l'indirizzo email del destinatario
       subject: 'Nuove foto caricate',
       text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
     };
@@ -113,7 +118,7 @@ exports.handler = async (event, context) => {
   } catch (emailError) {
     console.error('Errore nell\'invio della email:', emailError);
   }
-
+  
   return {
     statusCode: 200,
     headers: {
