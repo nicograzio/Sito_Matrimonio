@@ -63,7 +63,7 @@ exports.handler = async (event, context) => {
       });
 
       if (!response.ok) {
-        throw new Error(`Errore nel caricamento del file ${fileName}: ${response.statusText}`);
+        throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.statusText}`);
       }
 
       // Aggiungi il risultato del caricamento all'array
