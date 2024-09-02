@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
       },
       body: '',
     };
@@ -34,6 +34,26 @@ exports.handler = async (event, context) => {
   const repoOwner = 'nicograzio'; // Inserisci il tuo nome utente GitHub
   const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
 
+  // Funzione per ottenere lo SHA del file se esiste già
+  const getFileSha = async (githubApiUrl) => {
+    try {
+      const response = await fetch(githubApiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.sha;
+      }
+    } catch (error) {
+      console.error('Errore nel recupero dello SHA del file:', error.message);
+    }
+    return null;
+  };
+
   // Array per raccogliere i risultati di ogni caricamento
   let uploadResults = [];
 
@@ -46,9 +66,14 @@ exports.handler = async (event, context) => {
     const filePath = `images/${uniqueFileName}`; // Specifica il percorso del file nel repo
 
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+    // Ottieni lo SHA del file se esiste già (necessario per sovrascrivere file)
+    const sha = await getFileSha(githubApiUrl);
+
     const requestBody = {
-      message: `Aggiunto nuovo file: ${uniqueFileName}`,  // Messaggio di commit per il caricamento del file
-      content: Buffer.from(fileContent, 'base64').toString('base64'),  // Codifica il contenuto del file in base64
+      message: `Aggiunto nuovo file: ${uniqueFileName}`,
+      content: Buffer.from(fileContent, 'base64').toString('base64'), // Codifica il contenuto del file in base64
+      sha, // Include lo SHA se il file esiste già
     };
 
     console.log(`Caricamento del file ${uniqueFileName} all'URL: ${githubApiUrl}`);
@@ -64,8 +89,8 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(requestBody),
       });
 
-      const responseBody = await response.json();
-      console.log('Risposta API:', responseBody);
+      const responseBody = await response.json(); // Ottieni il corpo della risposta
+      console.log('Risposta API GitHub:', responseBody); // Log dettagliato della risposta
 
       if (!response.ok) {
         throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.statusText}`);
@@ -74,7 +99,7 @@ exports.handler = async (event, context) => {
       // Aggiungi il risultato del caricamento all'array
       uploadResults.push({ fileName: uniqueFileName, status: 'success' });
     } catch (error) {
-      console.error(error);
+      console.error('Errore:', error.message);
       // Aggiungi l'errore all'array dei risultati
       uploadResults.push({ fileName: uniqueFileName, status: 'error', message: error.message });
     }
@@ -91,7 +116,7 @@ exports.handler = async (event, context) => {
       },
       body: JSON.stringify({
         message: 'Errore nel caricamento di uno o più file.',
-        details: errors
+        details: errors,
       }),
     };
   }
@@ -116,9 +141,9 @@ exports.handler = async (event, context) => {
     await transporter.sendMail(mailOptions);
     console.log('Email inviata con successo');
   } catch (emailError) {
-    console.error('Errore nell\'invio della email:', emailError);
+    console.error('Errore nell\'invio della email:', emailError.message);
   }
-  
+
   return {
     statusCode: 200,
     headers: {
@@ -126,7 +151,7 @@ exports.handler = async (event, context) => {
     },
     body: JSON.stringify({
       message: 'File caricati con successo!\nLe foto saranno disponibili nella galleria non appena le avremo controllate.',
-      details: uploadResults
+      details: uploadResults,
     }),
   };
 };
