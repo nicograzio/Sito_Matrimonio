@@ -39,12 +39,16 @@ exports.handler = async (event, context) => {
 
   for (let i = 0; i < files.length; i++) {
     const { fileContent, fileName } = files[i];
-    const filePath = `images/${fileName}`; // Specifica il percorso del file nel repo
+
+    // Aggiungi un timestamp al nome del file per renderlo unico
+    const timestamp = Date.now(); // Ottieni il timestamp corrente
+    const uniqueFileName = `${timestamp}_${fileName}`; // Crea un nuovo nome file univoco
+    const filePath = `images/${uniqueFileName}`; // Specifica il percorso del file nel repo
 
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
     const requestBody = {
-      message: `Aggiunto nuovo file: ${fileName}`,  // Messaggio di commit per il caricamento del file
+      message: `Aggiunto nuovo file: ${uniqueFileName}`,  // Messaggio di commit per il caricamento del file
       content: Buffer.from(fileContent, 'base64').toString('base64'),  // Codifica il contenuto del file in base64
     };
 
@@ -63,11 +67,11 @@ exports.handler = async (event, context) => {
       }
 
       // Aggiungi il risultato del caricamento all'array
-      uploadResults.push({ fileName, status: 'success' });
+      uploadResults.push({ fileName: uniqueFileName, status: 'success' });
     } catch (error) {
       console.error(error);
       // Aggiungi l'errore all'array dei risultati
-      uploadResults.push({ fileName, status: 'error', message: error.message });
+      uploadResults.push({ fileName: uniqueFileName, status: 'error', message: error.message });
     }
   }
 
@@ -90,7 +94,7 @@ exports.handler = async (event, context) => {
   // Invia una email di notifica se tutti i file sono stati caricati correttamente
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // Usa il servizio che preferisci (es: Gmail, SendGrid)
+      service: 'hotmail',
       auth: {
         user: process.env.EMAIL_USER, // Usa una variabile di ambiente per l'email
         pass: process.env.EMAIL_PASS, // Usa una variabile di ambiente per la password
@@ -99,7 +103,7 @@ exports.handler = async (event, context) => {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_DEST, // Inserisci l'indirizzo email del destinatario
+      to: process.env.EMAIL_DEST, // Usa la variabile di ambiente per l'indirizzo email del destinatario
       subject: 'Nuove foto caricate',
       text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
     };
