@@ -1,17 +1,17 @@
 const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
 
-exports.handler = async (event, context) => {  
+exports.handler = async (event, context) => {
   // Gestisci la richiesta preflight (OPTIONS)
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',  // Permette richieste da qualsiasi origine
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',  // Permette gli header necessari
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'  // Metodi permessi
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
       },
-      body: '',  // Nessun corpo per la risposta preflight
+      body: '',
     };
   }
 
@@ -27,10 +27,10 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Usa le variabili di ambiente per sicurezza
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   console.log('Token ottenuto:', GITHUB_TOKEN ? 'Si' : 'No');
 
-  const { files, deviceName } = JSON.parse(event.body); // Recupera l'array di file e il nome del dispositivo dal body della richiesta
+  const { files, deviceName } = JSON.parse(event.body);
   const repoOwner = 'nicograzio'; // Inserisci il tuo nome utente GitHub
   const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
 
@@ -48,18 +48,18 @@ exports.handler = async (event, context) => {
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
     const requestBody = {
-      message: `Aggiunto nuovo file: ${uniqueFileName}`,  // Messaggio di commit per il caricamento del file
-      content: Buffer.from(fileContent, 'base64').toString('base64'),  // Codifica il contenuto del file in base64
+      message: `Aggiunto nuovo file: ${uniqueFileName}`,
+      content: Buffer.from(fileContent, 'base64').toString('base64'),
     };
 
     try {
       const response = await fetch(githubApiUrl, {
         method: 'PUT',
         headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,  // Usa il token GitHub per autorizzare la richiesta
+          'Authorization': `token ${GITHUB_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody),  // Invia il corpo della richiesta con i dettagli del commit
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -84,7 +84,7 @@ exports.handler = async (event, context) => {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Errore nel caricamento di uno o più file.',
         details: errors
       }),
@@ -96,14 +96,14 @@ exports.handler = async (event, context) => {
     const transporter = nodemailer.createTransport({
       service: 'hotmail',
       auth: {
-        user: process.env.EMAIL_USER, // Usa una variabile di ambiente per l'email
-        pass: process.env.EMAIL_PASS, // Usa una variabile di ambiente per la password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_DEST, // Usa la variabile di ambiente per l'indirizzo email del destinatario
+      to: process.env.EMAIL_DEST,
       subject: 'Nuove foto caricate',
       text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
     };
@@ -113,13 +113,13 @@ exports.handler = async (event, context) => {
   } catch (emailError) {
     console.error('Errore nell\'invio della email:', emailError);
   }
-  
+
   return {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       message: 'File caricati con successo!\nLe foto saranno disponibili nella galleria non appena le avremo controllate.',
       details: uploadResults
     }),
