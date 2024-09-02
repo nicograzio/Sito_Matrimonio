@@ -2,7 +2,6 @@ const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
-  // Gestisci la richiesta preflight (OPTIONS)
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -15,7 +14,6 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Controlla se il metodo non è POST
   if (event.httpMethod !== 'POST') {
     console.log('Metodo non consentito');
     return {
@@ -27,14 +25,11 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Usa le variabili di ambiente per sicurezza
-  console.log('Token ottenuto:', GITHUB_TOKEN ? 'Si' : 'No');
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const { files, deviceName } = JSON.parse(event.body);
+  const repoOwner = 'nicograzio';
+  const repoName = 'Sito_Matrimonio';
 
-  const { files, deviceName } = JSON.parse(event.body); // Recupera l'array di file e il nome del dispositivo dal body della richiesta
-  const repoOwner = 'nicograzio'; // Inserisci il tuo nome utente GitHub
-  const repoName = 'Sito_Matrimonio'; // Inserisci il nome del repository
-
-  // Funzione per ottenere lo SHA del file se esiste già
   const getFileSha = async (githubApiUrl) => {
     try {
       const response = await fetch(githubApiUrl, {
@@ -54,26 +49,20 @@ exports.handler = async (event, context) => {
     return null;
   };
 
-  // Array per raccogliere i risultati di ogni caricamento
   let uploadResults = [];
 
   for (let i = 0; i < files.length; i++) {
     const { fileContent, fileName } = files[i];
-
-    // Aggiungi un timestamp al nome del file per renderlo unico
-    const timestamp = Date.now(); // Ottieni il timestamp corrente
-    const uniqueFileName = `${timestamp}_${fileName}`; // Crea un nuovo nome file univoco
-    const filePath = `images/${uniqueFileName}`; // Specifica il percorso del file nel repo
-
+    const timestamp = Date.now();
+    const uniqueFileName = `${timestamp}_${fileName}`;
+    const filePath = `images/${uniqueFileName}`;
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-
-    // Ottieni lo SHA del file se esiste già (necessario per sovrascrivere file)
     const sha = await getFileSha(githubApiUrl);
 
     const requestBody = {
       message: `Aggiunto nuovo file: ${uniqueFileName}`,
-      content: Buffer.from(fileContent, 'base64').toString('base64'), // Codifica il contenuto del file in base64
-      sha, // Include lo SHA se il file esiste già
+      content: Buffer.from(fileContent, 'base64').toString('base64'),
+      sha,
     };
 
     console.log(`Caricamento del file ${uniqueFileName} all'URL: ${githubApiUrl}`);
@@ -89,23 +78,22 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(requestBody),
       });
 
-      const responseBody = await response.json(); // Ottieni il corpo della risposta
-      console.log('Risposta API GitHub:', responseBody); // Log dettagliato della risposta
+      const responseBody = await response.json();
+      console.log('Risposta API GitHub:', responseBody);
 
       if (!response.ok) {
-        throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.statusText}`);
+        console.error(`Errore nel caricamento del file ${uniqueFileName}: ${response.status} ${response.statusText}`);
+        console.error('Dettagli della risposta:', responseBody);
+        throw new Error(`Errore nel caricamento del file ${uniqueFileName}: ${response.status} ${response.statusText}`);
       }
 
-      // Aggiungi il risultato del caricamento all'array
       uploadResults.push({ fileName: uniqueFileName, status: 'success' });
     } catch (error) {
       console.error('Errore:', error.message);
-      // Aggiungi l'errore all'array dei risultati
       uploadResults.push({ fileName: uniqueFileName, status: 'error', message: error.message });
     }
   }
 
-  // Controlla se ci sono stati errori nel caricamento
   const errors = uploadResults.filter(result => result.status === 'error');
 
   if (errors.length > 0) {
@@ -121,19 +109,18 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Invia una email di notifica se tutti i file sono stati caricati correttamente
   try {
     const transporter = nodemailer.createTransport({
       service: 'hotmail',
       auth: {
-        user: process.env.EMAIL_USER, // Usa una variabile di ambiente per l'email
-        pass: process.env.EMAIL_PASS, // Usa una variabile di ambiente per la password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_DEST, // Usa la variabile di ambiente per l'indirizzo email del destinatario
+      to: process.env.EMAIL_DEST,
       subject: 'Nuove foto caricate',
       text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
     };
