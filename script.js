@@ -73,6 +73,65 @@ document.getElementById('Prenotazione').addEventListener('submit', async functio
 		alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
 });
 
+// Funzione per calcolare il numero di slide visibili in base alla larghezza dello schermo
+function calculateSlidesPerView() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 1200) {
+	return 5; // Schermi molto grandi
+    } else if (screenWidth >= 992) {
+	return 4; // Schermi grandi
+    } else if (screenWidth >= 768) {
+	return 3; // Schermi medi
+    } else if (screenWidth >= 576) {
+	return 2; // Schermi piccoli
+    } else {
+	return 1; // Schermi molto piccoli
+    }
+}
+
+// Inizializza Swiper
+var swiper = new Swiper('.swiper-container', {
+    slidesPerView: calculateSlidesPerView(),
+    centeredSlides: true,
+    loop: true,
+    slideToClickedSlide: true,
+    spaceBetween: -5,  // Sovrapposizione leggera tra le slide
+    effect: 'coverflow',
+    coverflowEffect: {
+	rotate: 0,
+	stretch: 0,
+	depth: 100,
+	modifier: 1,
+	slideShadows: false,
+    },
+    autoplay: {
+	delay: 3000,  // 3 secondi
+	disableOnInteraction: false,  // Continua anche se l'utente interagisce
+    },
+    on: {
+	setTranslate: function() {
+	    this.slides.forEach(function(slide) {
+		const slideProgress = slide.progress;
+		const scale = 1 - Math.abs(slideProgress) * 0.2;
+		const opacity = 1 - Math.abs(slideProgress) * 0.3;
+		const zIndex = 999 - Math.abs(slideProgress) * 10;  // Z-index decrescente
+		slide.style.transform = `scale(${scale})`;
+		slide.style.opacity = opacity;
+		slide.style.zIndex = Math.round(zIndex);
+	    });
+	}
+    }
+});
+
+// Funzione per aggiornare slidesPerView su ridimensionamento della finestra
+function updateSwiperSlidesPerView() {
+    swiper.params.slidesPerView = calculateSlidesPerView();
+    swiper.update();
+}
+
+// Aggiungi un listener per l'evento resize della finestra
+window.addEventListener('resize', updateSwiperSlidesPerView);
+
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
 	event.preventDefault();
