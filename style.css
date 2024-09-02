@@ -416,6 +416,26 @@ nav ul hr {
 }
 /*-------------------------------------------*/
 
+/* Galleria di immagini scrollabile */
+.swiper-container {
+    width: 80%;
+    height: 60vh;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
+    position: relative;
+}
+.swiper-slide img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+/*-------------------------------------------*/
+
 /* Stili responsivi */
 @media only screen and (max-width: 1037px) {
 
