@@ -76,13 +76,11 @@ document.getElementById('Prenotazione').addEventListener('submit', async functio
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
 	event.preventDefault();
-	console.log('Modulo inviato');
 	const files = document.getElementById('file').files;
 	const fileArray = [];
 	
 	for (let i = 0; i < files.length; i++) {
 		const fileContent = await toBase64(files[i]);
-		console.log('Contenuto Base64 del file:', fileContent);
 		fileArray.push({
 		    fileContent,
 		    fileName: files[i].name+'_cIAO'
@@ -102,7 +100,6 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		document.getElementById('upload-status').innerText = 'Errore nel caricamento delle foto';
 		console.error('Errore:', error);
 	}
-	alert('Caricamento avvenuto con successo!');
 
 	function toBase64(file) {
 	return new Promise((resolve, reject) => {
