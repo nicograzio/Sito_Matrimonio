@@ -85,7 +85,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		console.log('Contenuto Base64 del file:', fileContent);
 		fileArray.push({
 		    fileContent,
-		    fileName: files[i].name
+		    fileName: files[i].name+'_cIAO'
 		});
 	}
 	try {
