@@ -78,13 +78,17 @@ document.getElementById('upload-form').addEventListener('submit', async function
 	event.preventDefault();
 	const files = document.getElementById('file').files;
 	const fileArray = [];
+	const timestamp = Date.now();
 	
 	for (let i = 0; i < files.length; i++) {
 		const fileContent = await toBase64(files[i]);
-		fileArray.push({
-		    fileContent,
-		    fileName: files[i].name+'_cIAO'
-		});
+		const originalName = files[i].name;
+		const newFileName = `${timestamp}_${originalName}`;
+	        return { name, extension };
+			fileArray.push({
+			    fileContent,
+			    fileName: newFileName
+			});
 	}
 	try {
 	const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
