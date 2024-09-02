@@ -4,6 +4,7 @@
   - selezionare una o più immagini e scarciarle
   - scorrere le immagini della galleria
   - aprire la visualizzazione a pagina intera della foto, da tale pagina sarà possibile scaricare la singola foto sul proprio dispositivo.
+  - aggiungere logica lazy per ridurre il caricamento delle foto nella galleria
 
 3. migliorare la visualizzazione sia su schermi grandi che su schermi piccoli (prioritaria per i piccoli)
 
