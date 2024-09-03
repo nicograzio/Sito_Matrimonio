@@ -210,7 +210,7 @@ section {
 }
 
 .swiper-slide {
-    display: flex;
+    display: flex !importan;
     justify-content: center;
     align-items: center;
     transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
