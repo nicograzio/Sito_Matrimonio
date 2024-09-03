@@ -105,8 +105,8 @@ var swiper = new Swiper('.swiper-container', {
 	slideShadows: false,
     },
     autoplay: {
-	delay: 999999999999990,  // 3 secondi
-	disableOnInteraction: false,  // Continua anche se l'utente interagisce
+	delay: 3000,  // 3 secondi
+	disableOnInteraction: true,  // Continua anche se l'utente interagisce
     },
     on: {
 	setTranslate: function() {
