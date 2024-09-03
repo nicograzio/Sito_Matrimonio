@@ -1,202 +1,201 @@
-/* Stile generale */
+/* Stile generale per l'intero documento */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Scorrimento fluido per i link interni */
 }
 
 body {
-    font-family: 'Dancing Script', cursive; /* Applica il font su tutto il sito */
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+    font-family: 'Dancing Script', cursive; /* Applica il font personalizzato su tutto il sito */
+    line-height: 1.6; /* Altezza della linea per migliorare la leggibilità */
+    margin: 0; /* Rimuove il margine predefinito */
+    padding: 0; /* Rimuove il padding predefinito */
+    background-color: #f9f9f9; /* Colore di sfondo generale */
+    overflow-x: hidden; /* Previene lo scorrimento orizzontale */
 }
 
+/* Stile per intestazioni principali */
 h1, h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-size: 2.5em; /* Dimensione del font per intestazioni */
+    margin-bottom: 20px; /* Spazio inferiore */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Ombra per un effetto 3D */
 }
 
+/* Stile per paragrafi, liste non ordinate e form */
 p, ul, form {
-    margin: 0 auto;
-    font-size: 1.2em;
-    text-align: center;
+    margin: 0 auto; /* Centratura orizzontale */
+    font-size: 1.2em; /* Dimensione del font */
+    text-align: center; /* Testo centrato */
 }
 
+/* Stile specifico per i form */
 form {
-    display: flex;
+    display: flex; /* Disposizione degli elementi in colonna */
     flex-direction: column;
     align-items: center;
 }
 
 input, textarea, button {
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1em;
-    outline: none;
+    margin-top: 10px; /* Spaziatura superiore */
+    padding: 15px; /* Spaziatura interna */
+    border-radius: 8px; /* Angoli arrotondati */
+    border: none; /* Rimozione del bordo predefinito */
+    font-size: 1em; /* Dimensione del font */
+    outline: none; /* Rimozione del contorno di focus */
 }
 
 input, textarea {
-    width: 100%;
-    max-width: 500px;
+    width: 100%; /* Occupano il 100% della larghezza disponibile */
+    max-width: 500px; /* Larghezza massima per una migliore leggibilità */
 }
 
-/* Pulsanti e link */
+/* Stile per pulsanti e link */
 button, a {
-    color: white;
-    background-color: #333;
-    border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+    color: white; /* Colore del testo */
+    background-color: #333; /* Colore di sfondo scuro */
+    border: none; /* Rimozione del bordo */
+    padding: 10px 20px; /* Spaziatura interna */
+    text-decoration: none; /* Rimozione della sottolineatura */
+    transition: background-color 0.3s ease; /* Transizione al passaggio del mouse */
 }
 
+/* Effetto hover su pulsanti e link */
 button:hover, a:hover {
-    background-color: #555;
+    background-color: #555; /* Colore di sfondo al passaggio del mouse */
 }
+
 /*-------------------------------------------*/
 
-/* Stile comune delle sezioni */
+/* Stile comune per le sezioni */
 section {
-    padding: 100px 20px;
-    min-height: 90vh;
-    color: white;
-    display: flex;
+    padding: 100px 20px; /* Spaziatura interna della sezione */
+    min-height: 90vh; /* Altezza minima */
+    color: white; /* Colore del testo */
+    display: flex; /* Disposizione degli elementi */
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-	position: relative;
+    align-items: center; /* Allineamento centrale degli elementi */
+    justify-content: center; /* Centratura verticale */
+    background-size: cover; /* Sfondo a dimensione piena */
+    background-position: center; /* Posizionamento centrale dello sfondo */
+    position: relative; /* Posizionamento relativo per l'overlay */
 }
 
+/* Stile per immagini logo */
 .logo-image {
-	max-width: 150%;
-	max-height: 150%;
-	object-fit: contain;
-	position: absolute;
-	opacity: 0.2;
+    max-width: 150%; /* Dimensione massima */
+    max-height: 150%; /* Altezza massima */
+    object-fit: contain; /* Adatta l'immagine al contenitore */
+    position: absolute; /* Posizionamento assoluto */
+    opacity: 0.2; /* Trasparenza dell'immagine */
 }
 
-.foot-overlay2 {
-	width: 100%;
-    height: 100%;
-	top: 0;
-	left: 0;
-    position: absolute;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(253, 253, 253, 1) 99.5%, rgba(253, 253, 253, 1) 100%);
-}
-
+/* Overlay gradiente 1 */
 .foot-overlay1 {
-	width: 100%;
+    width: 100%;
     height: 100%;
-	top: 0;
-	left: 0;
+    top: 0;
+    left: 0;
     position: absolute;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(235, 235, 235, 1) 99.5%, rgba(235, 235, 235, 1) 100%);
 }
 
-.content {
-	width: 100%;
+/* Overlay gradiente 2 */
+.foot-overlay2 {
+    width: 100%;
     height: 100%;
-	z-index: 2;
-	overflow: hidden;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(253, 253, 253, 1) 99.5%, rgba(253, 253, 253, 1) 100%);
 }
 
-/* HOME */
+/* Contenuto della sezione */
+.content {
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Posizionamento sopra l'overlay */
+    overflow: hidden; /* Nasconde l'overflow */
+}
+
+/*-------------------------------------------*/
+
+/* HOME: Stile specifico per la sezione iniziale */
 #home {
-	padding-top: 75px;
+    padding-top: 75px; /* Spaziatura superiore */
     position: relative;
-    height: 90vh;
-	justify-content: flex-end;
+    height: 90vh; /* Altezza della sezione */
+    justify-content: flex-end; /* Allineamento alla fine */
 }
 
+/* Stile per il titolo principale della home */
 #home h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3em;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: 'Dancing Script', cursive; /* Font personalizzato */
+    font-size: 3em; /* Dimensione del font */
+    color: white; /* Colore del testo */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Ombra per effetto 3D */
     margin: 0;
     padding: 0px 20px;
-    text-align: center;
+    text-align: center; /* Testo centrato */
 }
 
+/* Stile per il countdown */
 #home #countdown {
     font-family: 'Dancing Script', cursive;
-	font-weight: bold;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     font-size: 2em;
     color: white;
     text-align: center;
 }
 
+/* Stile per il video di sfondo */
 #home #bg-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: -1;
+    object-fit: cover; /* Video che copre l'intera sezione */
+    z-index: -1; /* Posizionamento sotto il contenuto */
 }
 
+/* Overlay per contenuto home */
 #home .overlay {
     position: relative;
     z-index: 2;
     text-align: center;
     color: white;
     padding: 12px;
-	padding-bottom: 25px;
-	animation: fadeIn 3.5s ease-out forwards;
+    padding-bottom: 25px;
+    animation: fadeIn 3.5s ease-out forwards; /* Animazione di entrata */
 }
+
 /*-------------------------------------------*/
 
-#details {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+/* Stile specifico per diverse sezioni */
+#details, #rsvp, #donations, #location, #gallery, #contacts {
+    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat; /* Sfondo sfumato con immagine */
+    color: #333; /* Colore del testo */
 }
 
-#rsvp {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
-}
+/*-------------------------------------------*/
 
-#donations {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
-}
-
-/* LOCATION */
-#location {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
-}
-
+/* Stile specifico per la mappa */
 .mapouter {
-	position: relative;
-	text-align: right;
-	height: 560px;
-	width: 100%;
+    position: relative;
+    text-align: right;
+    height: 560px;
+    width: 100%;
 }
 
 .gmap_canvas {
-	overflow: hidden;
-	background: none !important;
-	height: 560px;
-	width: 100%;
+    overflow: hidden;
+    background: none !important;
+    height: 560px;
+    width: 100%;
 }
+
 /*-------------------------------------------*/
 
 /* Galleria Immagini */
-#gallery {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
-}
-
 .gallery-content {
     margin: 0;
     padding: 0;
@@ -206,381 +205,87 @@ section {
 }
 
 .swiper-container {
-    width: 100%;
+    width: 100%; /* Larghezza completa per la galleria */
 }
 
 .swiper-slide {
-    display: flex !importan;
+    display: flex !important; /* Mantiene il contenuto centrato */
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
+    transition: transform 0.3s, opacity 0.3s, z-index 0.3s; /* Transizioni per gli elementi */
     position: relative;
 }
 
 .swiper-slide img {
     width: 300px;
     height: 200px;
-    object-fit: cover;
-    border-radius: 15px;
+    object-fit: cover; /* Adatta le immagini */
+    border-radius: 15px; /* Angoli arrotondati */
 }
-/*-------------------------------------------*/
 
-#contacts {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.webp') center/cover no-repeat;
-    color: #333;
-}
+/*-------------------------------------------*/
 
 /* Stile della barra di navigazione */
 nav {
     position: fixed;
     top: 0;
-    width: -webkit-fill-available;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Sfondo semi-trasparente */
+    z-index: 1000; /* Priorità di visualizzazione sopra il contenuto */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombra della barra */
 }
 
-nav .logo-container {
-    display: flex;
-    align-items: center;
-}
-
-nav .logo {
-    height: 55px;
+.nav-logo {
+    height: 50px;
     width: auto;
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.nav-links {
     display: flex;
+    justify-content: center;
     align-items: center;
-	flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
 }
 
-nav ul li {
-    margin: 0 15px;
-    position: relative;
-}
-
-nav ul li a {
+.nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
     padding: 10px 15px;
-    display: block;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s;
-	background-color: transparent;
-}
-
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2.5px;
-    background: #bc964e;
-    transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
-    z-index: -1;
-}
-
-nav ul li a:hover {
-    color: #bc964e;
-	background-color: transparent;
-}
-
-nav ul li a:hover::after {
-    transform: scaleX(1);
-}
-
-nav ul li a.active {
-    color: #bc964e;
-}
-
-nav ul li a.active:after {
-    transform: scaleX(1);
-}
-
-nav ul {
-    flex-direction: column;
-    display: none;
-    position: absolute;
-    top: 55px;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-nav ul.show {
-    display: flex;
-}
-
-nav ul li {
-    margin: 10px 0;
-}
-
-nav ul li a {
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
     font-size: 1.2em;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-nav ul hr {
-    display: block;
+.nav-links a:hover {
+    background-color: #555; /* Colore al passaggio del mouse */
+    border-radius: 5px; /* Angoli arrotondati */
 }
-/*-------------------------------------------*/
 
-/* Menu toggle - Hamburger */
-.menu-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
+.menu-icon {
+    display: none; /* Nascosto per desktop */
+    font-size: 2em;
     cursor: pointer;
-    z-index: 1000;
 }
 
-.menu-toggle div {
-    width: 100%;
-    height: 4px;
-    background-color: #fff;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-/* Anima la trasformazione del pulsante */
-.menu-toggle.active .bar1 {
-    transform: rotate(-45deg) translate(-6px, 7.5px);
-}
-
-.menu-toggle.active .bar2 {
-    opacity: 0;
-}
-
-.menu-toggle.active .bar3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-/*-------------------------------------------*/
-
-/* Scrollbar stile iOS */
-::-webkit-scrollbar {
-    width: 0px;
-	background: transparent;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.6);
-}
-
-* {
-    scrollbar-width: none;
-    scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
-}
-
-*::-ms-scrollbar {
-    width: 0px;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-*::-ms-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-}
-
-*::-ms-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.6);
-}
-/*-------------------------------------------*/
-
-/* Stili responsivi */
-@media only screen and (max-width: 1037px) {
-
-    /* Layout a una colonna per schermi piccoli */
-    #polaroid-container {
-        display: none; /* Nascondi le polaroid su schermi piccoli */
-    }
-
-    /* Testi e titoli */
-    h1 {
-        font-size: 2.5em;
-    }
-
-    h2 {
-        font-size: 1.8em;
-    }
-
-    p, a, button {
-        font-size: 1em;
-    }
-
-    nav ul {
-        flex-direction: column;
+/* Media Query per dispositivi mobili */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Nasconde i link */
         position: absolute;
-        top: 55px;
-        left: 0;
+        top: 50px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
         width: 100%;
-        background-color: #333;
-        display: none;
-        text-align: center;
     }
 
-    nav ul.show {
-        display: flex;
-		background: rgba(0, 0, 0, 0.8);
+    .nav-links.active {
+        display: flex; /* Mostra il menu al clic */
     }
 
-    nav ul li {
-        margin: 10px 0;
+    .menu-icon {
+        display: block; /* Mostra l'icona del menu */
     }
-
-    nav a {
-        color: white;
-        padding: 10px;
-    }
-
-    /* Sezioni */
-    section {
-        padding: 20px;
-    }
-
-    /* Ridimensionamento delle immagini */
-    img {
-        width: 100%;
-        height: auto;
-    }
-
-    /* Pulsanti e link */
-    button, a {
-        padding: 10px 15px;
-    }
-	
-	#home {
-		padding-top: 65px;
-		position: relative;
-		height: 90vh;
-		background: none;
-	}
-	
-	#home h1 {
-		font-size: 2em;
-	}
-	
-	#home #countdown {
-		font-family: 'Dancing Script', cursive;
-		font-size: 30px;
-		color: white;
-		text-align: center;
-	}
-}
-
-/* Gestione del contenuto per schermi medi (tablet) */
-@media only screen and (min-width: 1038px) and (max-width: 1039px) {
-
-    /* Ridimensionamento dei testi */
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 2.2em;
-    }
-
-    p, a, button {
-        font-size: 1.1em;
-    }
-
-    /* Layout a due colonne */
-    #polaroid-container {
-        display: flex;
-    }
-
-    /* Immagini polaroid */
-    .polaroid {
-        width: 120px;
-        height: 150px;
-    }
-}
-
-/* Gestione del contenuto per schermi grandi (desktop) */
-@media only screen and (min-width: 1040px) {
-
-    /* Layout standard */
-    h1 {
-        font-size: 3.5em;
-    }
-
-    h2 {
-        font-size: 2.5em;
-    }
-
-    p, a, button {
-        font-size: 1.2em;
-    }
-
-   
-
-    nav ul li {
-        margin: 0 15px;
-    }
-
-    /* Immagini polaroid */
-    .polaroid {
-        width: 150px;
-        height: 180px;
-    }
-
-    /* Contenuto delle sezioni */
-    section {
-        padding: 60px;
-    }
-}
-
-/* Responsive adjustments */
-@media (min-width: 1040px) {
-    .menu-toggle {
-        display: none;
-    }
-
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        position: static;
-        background-color: transparent;
-        padding: 0;
-    }
-
-    nav ul li {
-        margin: 0 15px;
-    }
-	
-	nav ul hr {
-		display: none;
-	}
 }
