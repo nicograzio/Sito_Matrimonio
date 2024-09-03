@@ -68,7 +68,6 @@ button:hover, a:hover {
 section {
     padding: 100px 20px; /* Spaziatura interna della sezione */
     min-height: 90vh; /* Altezza minima */
-    color: white; /* Colore del testo */
     display: flex; /* Disposizione degli elementi */
     flex-direction: column;
     align-items: center; /* Allineamento centrale degli elementi */
