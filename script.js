@@ -72,7 +72,7 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
     };
 
     try {
-        const response = await fetch('http://localhost:8888/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
+        const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
