@@ -74,7 +74,7 @@ exports.handler = async function(event, context) {
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify({ message: 'File aggiornato con successo!' })
+            body: JSON.stringify({ message: 'Grazie mille, abbiamo aggiunto la tua prenotazione!' })
         };
     } catch (error) {
         console.error('Errore:', error);
