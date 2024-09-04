@@ -1,8 +1,27 @@
 exports.handler = async function(event, context) {
     const { Octokit } = await import("@octokit/rest");
 
+    // Imposta gli header CORS
+    const headers = {
+        'Access-Control-Allow-Origin': '*', // Permette richieste da qualsiasi origine. Modifica se necessario.
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+    };
+
+    if (event.httpMethod === 'OPTIONS') {
+        // Gestisci le richieste preflight OPTIONS
+        return {
+            statusCode: 204,
+            headers,
+        };
+    }
+
     if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, body: 'Method Not Allowed' };
+        return { 
+            statusCode: 405, 
+            headers,
+            body: 'Method Not Allowed' 
+        };
     }
 
     const data = JSON.parse(event.body);
@@ -54,12 +73,14 @@ exports.handler = async function(event, context) {
 
         return {
             statusCode: 200,
+            headers,
             body: JSON.stringify({ message: 'File aggiornato con successo!' })
         };
     } catch (error) {
         console.error('Errore:', error);
         return {
             statusCode: 500,
+            headers,
             body: JSON.stringify({ error: 'Errore durante l\'aggiornamento del file' })
         };
     }
