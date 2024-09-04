@@ -102,7 +102,7 @@ exports.handler = async function(event, context) {
         // Crea il messaggio email
         let info = await transporter.sendMail({
             from: `"Prenotazioni Sito" <${process.env.EMAIL_USER}>`, // mittente
-            to: 'EMAIL_DEST', // destinatario
+            to: process.env.EMAIL_DEST, // destinatario
             subject: 'Nuova Prenotazione', // Oggetto
             text: `Ciao,\nhai una nuova prenotazione.\n\nDettagli:\n- Nome: ${data.name}\n- Numero ospiti: ${data.guests}\n- Note: ${data.notes}`, // Corpo del messaggio
         });
