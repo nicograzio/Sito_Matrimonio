@@ -91,9 +91,7 @@ exports.handler = async (event, context) => {
   // Invia una email di notifica usando nodemailer
   try {
     const transporter = nodemailer.createTransport({
-      host: 'smtp-mail.outlook.com',
-      port: 587,
-      secure: false, // false per la porta 587, true per la porta 465
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
