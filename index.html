@@ -70,7 +70,7 @@
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Conferma la tua partecipazione</h2>
-			<form id="Prenotazione">
+			<form id="reservation-form">
 				<label for="name">Nome e Cognome:</label>
 				<input type="text" id="name" name="name" required>
 
@@ -122,22 +122,24 @@
 			<div class="gallery-content">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
-					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image"></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
+					    <div class="swiper-slide"><img src="poster.jpg" alt="Poster Image" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
 					</div>				
 				</div>
 			</div>
 			<form id="upload-form" enctype="multipart/form-data">
 				<input id="file" type="file" name="image" accept="image/*" required multiple>
-				<button type="submit">Carica Foto</button>
+				<label for="file" id="file-label">Seleziona file</label>
+				<span id="file-name"></span>
+				<button id="submit-photos" type="submit" disabled>Carica Foto</button>
 				<p id="upload-status"></p>
 			</form>
 		</div>
@@ -152,8 +154,8 @@
 			<ul>
 				<li>Telefono Nicholas: +39 3387747479</li>
 				<li>Telefono Carlotta: +39 3934455956</li>
-				<li>Email: <a href="mailto:nicholasgrazioli@hotmail.it">nicholasgrazioli@hotmail.it</a></li>
-				<li>Email: <a href="mailto:carlottadaviddi@gmail.com">carlottadaviddi@gmail.com</a></li>
+				<li>Email: <a href="mailto:nicholasgrazioli@hotmail.it" class="email">nicholasgrazioli@hotmail.it</a></li>
+				<li>Email: <a href="mailto:carlottadaviddi@gmail.com" class="email">carlottadaviddi@gmail.com</a></li>
 			</ul>
 		</div>
 		<div class="foot-overlay2"></div>

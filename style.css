@@ -1,4 +1,3 @@
-riesci a migliorare questo codice e aggiungere dei commenti:
 /* Stile generale */
 html {
     scroll-behavior: smooth;
@@ -9,7 +8,6 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
@@ -18,12 +16,14 @@ h1, h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+	text-align: center;
 }
 
 p, ul, form {
     margin: 0 auto;
     font-size: 1.2em;
     text-align: center;
+	list-style-position: inside;
 }
 
 form {
@@ -54,10 +54,18 @@ button, a {
     padding: 10px 20px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+	font-family: 'Dancing Script', cursive;
 }
 
 button:hover, a:hover {
     background-color: #555;
+}
+
+button:disabled {
+	background-color: #666;
+	color: white;
+	cursor: not-allowed;
+	opacity: 0.8; /* Rende il pulsante visivamente più trasparente */
 }
 /*-------------------------------------------*/
 
@@ -225,10 +233,20 @@ section {
 }
 /*-------------------------------------------*/
 
+/* CONTATTI */
 #contacts {
     background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.webp') center/cover no-repeat;
     color: #333;
 }
+
+#contacts a {
+    color: #333;
+    border: none;
+	background-color: transparent;
+    font-weight: bold;
+	padding: 0;
+}
+/*-------------------------------------------*/
 
 /* Stile della barra di navigazione */
 nav {
@@ -418,6 +436,43 @@ nav ul hr {
     background: rgba(0, 0, 0, 0.6);
 }
 /*-------------------------------------------*/
+
+/* Stile del modulo */
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: auto;
+}
+
+/* Stile dell'input file */
+#file {
+    display: none; /* Nascondi l'elemento originale */
+}
+
+/* Stile del label per il file input */
+#file + label {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#file + label:hover {
+    background-color: #555;
+}
+
+/* Aggiungi un'etichetta personalizzata per il file input */
+#upload-form input[type="file"] + label::after {
+    display: block;
+}
+/***********************************************/
 
 /* Stili responsivi */
 @media only screen and (max-width: 1037px) {

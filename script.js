@@ -22,6 +22,7 @@ var countdown = setInterval(function() {
 		document.getElementById("time").innerHTML = "Ci siamo SPOSATI!";
 	}
 }, 1000);
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Aggiungi animazioni al caricamento delle sezioni
 let contents = document.querySelectorAll('.logo-image');
@@ -46,47 +47,55 @@ window.addEventListener('scroll', function() {
 		}
 	});
 });
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Mostra/nasconde il menu di navigazione al clic del menu hamburger
 document.querySelector('.menu-toggle').addEventListener('click', function() {
 	this.classList.toggle('active');
 	document.querySelector('nav ul').classList.toggle('show');
 });
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Autoplay video
 var video = document.getElementById('bg-video');
 video.play();
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Invio dati del form per la prenotazione
-document.getElementById('Prenotazione').addEventListener('submit', async function(e) {
-	e.preventDefault(); // Previene il comportamento predefinito di invio del form
-	const formData = new FormData(this); // Cattura i dati del form
-	const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit', {
-		method: 'POST',
-		body: JSON.stringify(Object.fromEntries(formData)),
-		headers: { 'Content-Type': 'application/json' }
-	});
-	
-	if (response.ok)
-		alert('Grazie per aver inoltrato la tua partecipazione!');
-	else
-		alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
+document.getElementById('reservation-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = {
+        name: event.target.name.value,
+        guests: event.target.guests.value,
+        notes: event.target.notes.value
+    };
+
+    try {
+        const response = await fetch('http://localhost:8888/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            alert('Prenotazione inviata con successo!');
+        } else {
+            alert('Errore durante l\'invio della prenotazione.');
+        }
+    } catch (error) {
+        alert('Errore durante l\'invio della prenotazione.');
+        console.error(error);
+    }
 });
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Funzione per calcolare il numero di slide visibili in base alla larghezza dello schermo
 function calculateSlidesPerView() {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 1200) {
-	return 5; // Schermi molto grandi
-    } else if (screenWidth >= 992) {
-	return 4; // Schermi grandi
-    } else if (screenWidth >= 768) {
-	return 3; // Schermi medi
-    } else if (screenWidth >= 576) {
-	return 2; // Schermi piccoli
-    } else {
-	return 1; // Schermi molto piccoli
-    }
+	return Math.floor(screenWidth / 300) + 1;
 }
 
 // Inizializza Swiper
@@ -94,32 +103,32 @@ var swiper = new Swiper('.swiper-container', {
     slidesPerView: calculateSlidesPerView(),
     centeredSlides: true,
     loop: true,
-    slideToClickedSlide: true,
+    slideToClickedSlide: false,
     spaceBetween: -5,  // Sovrapposizione leggera tra le slide
     effect: 'coverflow',
     coverflowEffect: {
-	rotate: 0,
-	stretch: 0,
-	depth: 100,
-	modifier: 1,
-	slideShadows: false,
+		rotate: 0,
+		stretch: 0,
+		depth: 100,
+		modifier: 1,
+		slideShadows: false,
     },
     autoplay: {
-	delay: 3000,  // 3 secondi
-	disableOnInteraction: true,  // Continua anche se l'utente interagisce
+		delay: 3000,  // 3 secondi
+		disableOnInteraction: false,  // Continua anche se l'utente interagisce
     },
     on: {
-	setTranslate: function() {
-	    this.slides.forEach(function(slide) {
-		const slideProgress = slide.progress;
-		const scale = 1 - Math.abs(slideProgress) * 0.2;
-		const opacity = 1 - Math.abs(slideProgress) * 0.3;
-		const zIndex = 999 - Math.abs(slideProgress) * 10;  // Z-index decrescente
-		slide.style.transform = `scale(${scale})`;
-		slide.style.opacity = opacity;
-		slide.style.zIndex = Math.round(zIndex);
-	    });
-	}
+		setTranslate: function() {
+			this.slides.forEach(function(slide) {
+			const slideProgress = slide.progress;
+			const scale = 1 - Math.abs(slideProgress) * 0.08;
+			const opacity = 1 - Math.abs(slideProgress) * 0.15;
+			const zIndex = 999 - Math.abs(slideProgress) * 10;  // Z-index decrescente
+			slide.style.transform = `scale(${scale})`;
+			slide.style.opacity = opacity;
+			slide.style.zIndex = Math.round(zIndex);
+			});
+		}
     }
 });
 
@@ -131,6 +140,28 @@ function updateSwiperSlidesPerView() {
 
 // Aggiungi un listener per l'evento resize della finestra
 window.addEventListener('resize', updateSwiperSlidesPerView);
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Caricamento immagini
+document.getElementById('file').addEventListener('change', function() {
+    const fileInput = this;
+    const fileNameDisplay = document.getElementById('file-name');
+	const buttonSubmitPhotos = document.getElementById('submit-photos');
+
+    if (fileInput.files.length === 1) {
+        // Se è stato selezionato un solo file, mostra il nome del file
+        fileNameDisplay.textContent = fileInput.files[0].name;
+		buttonSubmitPhotos.disabled = false;
+    } else if (fileInput.files.length > 1) {
+        // Se sono stati selezionati più file, mostra il numero di file
+        fileNameDisplay.textContent = fileInput.files.length + " file selezionati";
+		buttonSubmitPhotos.disabled = false;
+    } else {
+        // Se non è stato selezionato alcun file
+        fileNameDisplay.textContent = "";
+		buttonSubmitPhotos.disabled = true;
+    }
+});
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Invio delle foto dal form nella gallery
@@ -156,20 +187,26 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		headers: { 'Content-Type': 'application/json' }
 	});
 	
-	const result = await response.json();
-	document.getElementById('upload-status').innerText = result.message;
+	if(response.ok) {
+		const result = await response.json();
+		//document.getElementById('upload-status').innerText = result.message;
+		alert(result.message);
+	}
+	else
+		alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
+	
 	} catch (error) {
 		alert('Errore nel caricamento! Ti preghiamo di riprovare più tardi.\nNel caso il problema persista puoi contattare Nicholas.');
-		document.getElementById('upload-status').innerText = 'Errore nel caricamento delle foto';
+		//document.getElementById('upload-status').innerText = 'Errore nel caricamento delle foto';
 		console.error('Errore:', error);
 	}
 
 	function toBase64(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = () => resolve(reader.result.split(',')[1]);
-		reader.onerror = error => reject(error);
-	});
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result.split(',')[1]);
+			reader.onerror = error => reject(error);
+		});
 	}
 });
