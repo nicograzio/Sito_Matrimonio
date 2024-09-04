@@ -1,5 +1,6 @@
 exports.handler = async function(event, context) {
     const { Octokit } = await import("@octokit/rest");
+    const nodemailer = require('nodemailer');
 
     // Imposta gli header CORS
     const headers = {
@@ -50,7 +51,7 @@ exports.handler = async function(event, context) {
         let updatedContent;
 
         if (filePath.endsWith('.csv')) {
-            const newLine = `${data.name},${data.participants},${data.notes}\n`;
+            const newLine = `${data.name},${data.guests},${data.notes}\n`;
             updatedContent = content + newLine;
         } else if (filePath.endsWith('.json')) {
             const jsonData = JSON.parse(content);
@@ -71,6 +72,9 @@ exports.handler = async function(event, context) {
             sha: fileData.sha // necessario per l'aggiornamento del file esistente
         });
 
+        // Invia l'email di notifica
+        await sendEmailNotification(data);
+
         return {
             statusCode: 200,
             headers,
@@ -83,5 +87,24 @@ exports.handler = async function(event, context) {
             headers,
             body: JSON.stringify({ error: 'Errore durante l\'aggiornamento del file' })
         };
+    }
+
+    async function sendEmailNotification(data) {
+        // Configura il trasporto SMTP utilizzando un account Gmail
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER, // Email Gmail utente
+                pass: process.env.EMAIL_PASS, // Password o App Password di Gmail
+            },
+        });
+
+        // Crea il messaggio email
+        let info = await transporter.sendMail({
+            from: `"Prenotazioni Sito" <${process.env.EMAIL_USER}>`, // mittente
+            to: 'EMAIL_DEST', // destinatario
+            subject: 'Nuova Prenotazione', // Oggetto
+            text: `Ciao,\nhai una nuova prenotazione.\n\nDettagli:\n- Nome: ${data.name}\n- Numero ospiti: ${data.guests}\n- Note: ${data.notes}`, // Corpo del messaggio
+        });
     }
 };
