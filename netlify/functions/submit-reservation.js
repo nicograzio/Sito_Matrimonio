@@ -73,7 +73,7 @@ exports.handler = async function(event, context) {
         });
 
         // Invia l'email di notifica
-        await sendEmailNotification(data);
+        //await sendEmailNotification(data);
 
         return {
             statusCode: 200,
