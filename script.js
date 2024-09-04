@@ -73,7 +73,7 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
 
 	console.log(formData);
 
-    /*try {
+    try {
         const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
             method: 'POST',
             body: JSON.stringify(formData),
@@ -90,7 +90,7 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
     } catch (error) {
         alert('Errore durante l\'invio della prenotazione.');
         console.error(error);
-    }*/
+    }
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
