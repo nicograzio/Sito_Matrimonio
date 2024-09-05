@@ -94,6 +94,32 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// Funzione per copiare l'IBAN
+const copyButton = document.getElementById('copy-button');
+const ibanText = document.getElementById('iban').textContent;
+const popup = document.getElementById('popup');
+
+copyButton.addEventListener('click', () => {
+    // Copia il contenuto negli appunti
+    navigator.clipboard.writeText(ibanText).then(() => {
+        // Mostra il popup
+        popup.style.display = 'block';
+        popup.style.opacity = '1';
+        
+        // Nasconde il popup dopo 3 secondi con animazione fade-out
+        setTimeout(() => {
+            popup.classList.add('fade-out');
+        }, 2000);
+        
+        // Rimuove il popup completamente dopo 3.5 secondi
+        setTimeout(() => {
+            popup.style.display = 'none';
+            popup.classList.remove('fade-out');
+        }, 3500);
+    });
+});
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Funzione per calcolare il numero di slide visibili in base alla larghezza dello schermo
 function calculateSlidesPerView() {
     const screenWidth = window.innerWidth;
