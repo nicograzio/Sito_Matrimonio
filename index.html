@@ -90,11 +90,14 @@
 	<!-- Donazione - Pagina che riporta il nostro IBAN per donazione (aggiungere evenntuale lista nozze) -->
     <section id="donations">
 		<img class="logo-image" src="logo.png">
-		<div class="content">
+		<div class="content" style="overflow: visible">
 			<h2>Donazioni e Regali</h2>
 			<p>Se desiderate farci un regalo, potete contribuire con una donazione al seguente IBAN:</p>
-			<p>IBAN: <strong id="iban">IT36G0303266240010000766838</strong></p>
-			<button id="copy-button"><i class="fas fa-copy"></i></button>
+			<div id="iban-container">
+				<p id="iban"><strong>IT36G0303266240010000766838</strong></p>
+				<button id="copy-button" aria-label="Copia IBAN"><i class="fas fa-copy"></i></button>
+				<div id="popup" class="popup">Copia effettuata!</div>
+			</div>
 		</div>
     <div class="foot-overlay1"></div>
 	</section>
