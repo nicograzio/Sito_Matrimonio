@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 // Handler principale dell'evento Lambda
 exports.handler = async (event, context) => {
@@ -88,28 +89,8 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Invia una email di notifica usando nodemailer
-  try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_DEST,
-      subject: 'Nuove foto caricate',
-      text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log('Email inviata con successo');
-  } catch (emailError) {
-    console.error('Errore nell\'invio della email:', emailError.message);
-  }
+  // Invia una email di notifica
+  await sendEmailNotification(deviceName, uploadResults);
 
   // Ritorna una risposta di successo
   return {
@@ -122,4 +103,47 @@ exports.handler = async (event, context) => {
       details: uploadResults,
     }),
   };
+
+  async function sendEmailNotification(deviceName, uploadResults) {
+    try {
+  
+      // Configura OAuth2 per Nodemailer
+      const oauth2Client = new google.auth.OAuth2(
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        "https://developers.google.com/oauthplayground"
+      );
+      
+      oauth2Client.setCredentials({
+        refresh_token: process.env.REFRESH_TOKEN
+      });
+      
+      const accessToken = await oauth2Client.getAccessToken();
+  
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          type: 'OAuth2',
+          user: process.env.EMAIL_USER,
+          accessToken: accessToken.token,
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN,
+        },
+      });
+  
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_DEST,
+        subject: 'Nuove foto caricate',
+        text: `Sono state caricate delle nuove foto da ${deviceName}.\n\nElenco dei file:\n${uploadResults.map(file => file.fileName).join('\n')}`,
+      };
+  
+      await transporter.sendMail(mailOptions);
+      console.log('Email inviata con successo');
+    } catch (error) {
+      console.error('Errore nell\'invio della email:', error.message);
+    }
+  }
+  
 };
