@@ -173,10 +173,70 @@ section {
     color: #333;
 }
 
+/* DONATIONS */
 #donations {
     background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
     color: #333;
 }
+
+#iban-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 2px solid #000;
+    border-radius: 10px;
+    justify-content: center;
+    flex-direction: row;
+    width: fit-content;
+    margin: 4px auto;
+	background-color: white;
+}
+
+#iban {
+	margin: 0;
+    padding: 0 10px;
+}
+
+#popup {
+    display: none;
+    position: absolute;
+    top: 120%; /* Posiziona il popup appena sotto il pulsante */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.5s ease-out; /* Animazione di fade out */
+}
+
+/* Triangolino sotto il popup */
+#popup::after {
+    content: '';
+    position: absolute;
+    top: -11px; /* Posiziona il triangolino sopra il popup */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent; /* Triangolo nero */
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+#copy-button {
+	margin: 0;
+    border-top-right-radius: 10px; /* Arrotonda l'angolo in alto a destra */
+    border-bottom-right-radius: 10px; /* Arrotonda l'angolo in basso a destra */
+    border-top-left-radius: 0; /* Assicura che l'angolo in alto a sinistra non sia arrotondato */
+    border-bottom-left-radius: 0; /* Assicura che l'angolo in basso a sinistra non sia arrotondato */
+}
+/*-------------------------------------------*/
 
 /* LOCATION */
 #location {
