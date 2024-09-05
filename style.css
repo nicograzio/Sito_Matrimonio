@@ -230,9 +230,7 @@ section {
 }
 
 #copy-button {
-	margin: 0;
-    border-top-right-radius: 10px; /* Arrotonda l'angolo in alto a destra */
-    border-bottom-right-radius: 10px; /* Arrotonda l'angolo in basso a destra */
+    margin: 0;
     border-top-left-radius: 0; /* Assicura che l'angolo in alto a sinistra non sia arrotondato */
     border-bottom-left-radius: 0; /* Assicura che l'angolo in basso a sinistra non sia arrotondato */
 }
