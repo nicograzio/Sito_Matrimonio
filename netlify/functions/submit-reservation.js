@@ -1,16 +1,17 @@
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
+
 exports.handler = async function(event, context) {
     const { Octokit } = await import("@octokit/rest");
-    const nodemailer = require('nodemailer');
 
     // Imposta gli header CORS
     const headers = {
-        'Access-Control-Allow-Origin': '*', // Permette richieste da qualsiasi origine. Modifica se necessario.
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type'
     };
 
     if (event.httpMethod === 'OPTIONS') {
-        // Gestisci le richieste preflight OPTIONS
         return {
             statusCode: 204,
             headers,
@@ -33,7 +34,7 @@ exports.handler = async function(event, context) {
 
     const repoOwner = 'nicograzio';
     const repoName = 'Sito_Matrimonio';
-    const filePath = 'reservations/data.csv';  // O 'data.json'
+    const filePath = 'reservations/data.csv'; 
     const commitMessage = 'Aggiunta nuova prenotazione';
 
     try {
@@ -69,11 +70,11 @@ exports.handler = async function(event, context) {
             path: filePath,
             message: commitMessage,
             content: newContentEncoded,
-            sha: fileData.sha // necessario per l'aggiornamento del file esistente
+            sha: fileData.sha 
         });
 
         // Invia l'email di notifica
-        //await sendEmailNotification(data);
+        await sendEmailNotification(data);
 
         return {
             statusCode: 200,
@@ -90,21 +91,45 @@ exports.handler = async function(event, context) {
     }
 
     async function sendEmailNotification(data) {
-        // Configura il trasporto SMTP utilizzando un account Gmail
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER, // Email Gmail utente
-                pass: process.env.EMAIL_PASS, // Password o App Password di Gmail
-            },
+        // Configura OAuth2 client
+        const oAuth2Client = new google.auth.OAuth2(
+            process.env.CLIENT_ID,
+            process.env.CLIENT_SECRET,
+            "https://developers.google.com/oauthplayground"
+        );
+
+        oAuth2Client.setCredentials({
+            refresh_token: process.env.REFRESH_TOKEN
         });
 
-        // Crea il messaggio email
-        let info = await transporter.sendMail({
-            from: `"Prenotazioni Sito" <${process.env.EMAIL_USER}>`, // mittente
-            to: process.env.EMAIL_DEST, // destinatario
-            subject: 'Nuova Prenotazione', // Oggetto
-            text: `Ciao,\nhai una nuova prenotazione.\n\nDettagli:\n- Nome: ${data.name}\n- Numero ospiti: ${data.guests}\n- Note: ${data.notes}`, // Corpo del messaggio
-        });
+        try {
+            // Ottieni il token di accesso
+            const accessToken = await oAuth2Client.getAccessToken();
+
+            // Configura il trasporto SMTP utilizzando OAuth2
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    type: 'OAuth2',
+                    user: process.env.EMAIL_USER,
+                    clientId: process.env.CLIENT_ID,
+                    clientSecret: process.env.CLIENT_SECRET,
+                    refreshToken: process.env.REFRESH_TOKEN,
+                    accessToken: accessToken.token,  // Il token di accesso appena ottenuto
+                },
+            });
+
+            // Crea il messaggio email
+            let info = await transporter.sendMail({
+                from: `"Prenotazioni Sito" <${process.env.EMAIL_USER}>`, // mittente
+                to: process.env.EMAIL_DEST, // destinatario
+                subject: 'Nuova Prenotazione', // Oggetto
+                text: `Ciao,\nhai una nuova prenotazione.\n\nDettagli:\n- Nome: ${data.name}\n- Numero ospiti: ${data.guests}\n- Note: ${data.notes}`, // Corpo del messaggio
+            });
+
+            console.log("Messaggio inviato:", info.messageId);
+        } catch (error) {
+            console.error("Errore nell'invio dell'email:", error);
+        }
     }
 };
