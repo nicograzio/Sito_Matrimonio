@@ -8,22 +8,20 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 h1, h2 {
-    font-size: 2.5em;
+    font-size: 3.5em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-	text-align: center;
+    text-align: center;
 }
 
 p, ul, form {
     margin: 0 auto;
-    font-size: 1.2em;
+    font-size: 1.5em;
     text-align: center;
-	list-style-position: inside;
+    list-style-position: inside;
 }
 
 form {
@@ -516,7 +514,7 @@ nav ul hr {
     background-color: #333;
     color: white;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s ease;
@@ -613,70 +611,8 @@ nav ul hr {
 	}
 }
 
-/* Gestione del contenuto per schermi medi (tablet) */
-@media only screen and (min-width: 1038px) and (max-width: 1039px) {
-
-    /* Ridimensionamento dei testi */
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 2.2em;
-    }
-
-    p, a, button {
-        font-size: 1.1em;
-    }
-
-    /* Layout a due colonne */
-    #polaroid-container {
-        display: flex;
-    }
-
-    /* Immagini polaroid */
-    .polaroid {
-        width: 120px;
-        height: 150px;
-    }
-}
-
-/* Gestione del contenuto per schermi grandi (desktop) */
-@media only screen and (min-width: 1040px) {
-
-    /* Layout standard */
-    h1 {
-        font-size: 3.5em;
-    }
-
-    h2 {
-        font-size: 2.5em;
-    }
-
-    p, a, button {
-        font-size: 1.2em;
-    }
-
-   
-
-    nav ul li {
-        margin: 0 15px;
-    }
-
-    /* Immagini polaroid */
-    .polaroid {
-        width: 150px;
-        height: 180px;
-    }
-
-    /* Contenuto delle sezioni */
-    section {
-        padding: 60px;
-    }
-}
-
 /* Responsive adjustments */
-@media (min-width: 1040px) {
+@media (min-width: 1150px) {
     .menu-toggle {
         display: none;
     }
