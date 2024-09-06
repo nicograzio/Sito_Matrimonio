@@ -1,62 +1,62 @@
 /* Stile generale */
 html {
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Dancing Script', cursive; /* Applica il font su tutto il sito */
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+	font-family: 'Dancing Script', cursive; /* Applica il font su tutto il sito */
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
 }
 
 h1, h2 {
-    font-size: 3.5em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    text-align: center;
+	font-size: 3.5em;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+	text-align: center;
 }
 
 p, ul, form {
-    margin: 0 auto;
-    font-size: 1.5em;
-    text-align: center;
-    list-style-position: inside;
+	margin: 0 auto;
+	font-size: 1.5em;
+	text-align: center;
+	list-style-position: inside;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 input, textarea, button {
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1em;
-    outline: none;
+	margin-top: 10px;
+	padding: 15px;
+	border-radius: 8px;
+	border: none;
+	font-size: 1em;
+	outline: none;
 }
 
 input, textarea {
-    width: 100%;
-    max-width: 500px;
+	width: 100%;
+	max-width: 500px;
 }
 
 /* Pulsanti e link */
 button, a {
-    color: white;
-    background-color: #333;
-    border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+	color: white;
+	background-color: #333;
+	border: none;
+	padding: 10px 20px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
 	font-family: 'Dancing Script', cursive;
 }
 
 button:hover, a:hover {
-    background-color: #555;
+	background-color: #555;
 }
 
 button:disabled {
@@ -69,14 +69,14 @@ button:disabled {
 
 /* Stile comune delle sezioni */
 section {
-    padding: 100px 20px;
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
+	padding: 100px 20px;
+	min-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-size: cover;
+	background-position: center;
 	position: relative;
 }
 
@@ -90,25 +90,25 @@ section {
 
 .foot-overlay2 {
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	top: 0;
 	left: 0;
-    position: absolute;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(253, 253, 253, 1) 99.5%, rgba(253, 253, 253, 1) 100%);
+	position: absolute;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(253, 253, 253, 0.9) 99.5%, rgba(253, 253, 253, 0.9) 100%);
 }
 
 .foot-overlay1 {
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	top: 0;
 	left: 0;
-    position: absolute;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(235, 235, 235, 1) 99.5%, rgba(235, 235, 235, 1) 100%);
+	position: absolute;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 92.5%, rgba(235, 235, 235, 0.9) 99.5%, rgba(235, 235, 235, 0.9) 100%);
 }
 
 .content {
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	z-index: 2;
 	overflow: hidden;
 }
@@ -116,128 +116,128 @@ section {
 /* HOME */
 #home {
 	padding-top: 75px;
-    position: relative;
-    height: 90vh;
+	position: relative;
+	height: 90vh;
 	justify-content: flex-end;
 }
 
 #home h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3em;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    margin: 0;
-    padding: 0px 20px;
-    text-align: center;
+	font-family: 'Dancing Script', cursive;
+	font-size: 3em;
+	color: white;
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+	margin: 0;
+	padding: 0px 20px;
+	text-align: center;
 }
 
 #home #countdown {
-    font-family: 'Dancing Script', cursive;
+	font-family: 'Dancing Script', cursive;
 	font-weight: bold;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    font-size: 2em;
-    color: white;
-    text-align: center;
+	font-size: 2em;
+	color: white;
+	text-align: center;
 }
 
 #home #bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
 }
 
 #home .overlay {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-    padding: 12px;
+	position: relative;
+	z-index: 2;
+	text-align: center;
+	color: white;
+	padding: 12px;
 	padding-bottom: 25px;
 	animation: fadeIn 3.5s ease-out forwards;
 }
 /*-------------------------------------------*/
 
 #details {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
+	color: #333;
 }
 
 #rsvp {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9));
+	color: #333;
 }
 
 /* DONATIONS */
 #donations {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
+	color: #333;
 }
 
 #iban-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 2px solid #000;
-    border-radius: 10px;
-    justify-content: center;
-    flex-direction: row;
-    width: fit-content;
-    margin: 4px auto;
+	display: flex;
+	align-items: center;
+	position: relative;
+	border: 2px solid #000;
+	border-radius: 10px;
+	justify-content: center;
+	flex-direction: row;
+	width: fit-content;
+	margin: 4px auto;
 	background-color: white;
 }
 
 #iban {
 	margin: 0;
-    padding: 0 10px;
+	padding: 0 10px;
 }
 
 #popup {
-    display: none;
-    position: absolute;
-    top: 120%; /* Posiziona il popup appena sotto il pulsante */
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 14px;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.5s ease-out; /* Animazione di fade out */
+	display: none;
+	position: absolute;
+	top: 120%; /* Posiziona il popup appena sotto il pulsante */
+	left: 50%;
+	transform: translateX(-50%);
+	background: #333;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-size: 14px;
+	white-space: nowrap;
+	opacity: 0;
+	transition: opacity 0.5s ease-out; /* Animazione di fade out */
 }
 
 /* Triangolino sotto il popup */
 #popup::after {
-    content: '';
-    position: absolute;
-    top: -11px; /* Posiziona il triangolino sopra il popup */
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent transparent #333 transparent; /* Triangolo nero */
+	content: '';
+	position: absolute;
+	top: -11px; /* Posiziona il triangolino sopra il popup */
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent transparent #333 transparent; /* Triangolo nero */
 }
 
 .fade-out {
-    opacity: 0;
+	opacity: 0;
 }
 
 #copy-button {
-    margin: 0;
-    border-top-left-radius: 0; /* Assicura che l'angolo in alto a sinistra non sia arrotondato */
-    border-bottom-left-radius: 0; /* Assicura che l'angolo in basso a sinistra non sia arrotondato */
+	margin: 0;
+	border-top-left-radius: 0; /* Assicura che l'angolo in alto a sinistra non sia arrotondato */
+	border-bottom-left-radius: 0; /* Assicura che l'angolo in basso a sinistra non sia arrotondato */
 }
 /*-------------------------------------------*/
 
 /* LOCATION */
 #location {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9));
+	color: #333;
 }
 
 .mapouter {
@@ -257,340 +257,334 @@ section {
 
 /* Galleria Immagini */
 #gallery {
-    background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), url('sfondo.png') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
+	color: #333;
 }
 
 .gallery-content {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .swiper-container {
-    width: 100%;
+	width: 100%;
 }
 
 .swiper-slide {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
-    position: relative;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.3s, opacity 0.3s, z-index 0.3s;
+	position: relative;
 }
 
 .swiper-slide img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 15px;
+	width: 300px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 15px;
 }
 /*-------------------------------------------*/
 
 /* CONTATTI */
 #contacts {
-    background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9)), url('sfondo.webp') center/cover no-repeat;
-    color: #333;
+	background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9));
+	color: #333;
 }
 
 #contacts a {
-    color: #333;
-    border: none;
+	color: #333;
+	border: none;
 	background-color: transparent;
-    font-weight: bold;
+	font-weight: bold;
 	padding: 0;
 }
 /*-------------------------------------------*/
 
 /* Stile della barra di navigazione */
 nav {
-    position: fixed;
-    top: 0;
-    width: -webkit-fill-available;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+	position: fixed;
+	top: 0;
+	width: -webkit-fill-available;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(10px);
 }
 
 nav .logo-container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 nav .logo {
-    height: 55px;
-    width: auto;
+	height: 55px;
+	width: auto;
 }
 
 nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
 	flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 }
 
 nav ul li {
-    margin: 0 15px;
-    position: relative;
+	margin: 0 15px;
+	position: relative;
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
-    display: block;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s;
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px 15px;
+	display: block;
+	position: relative;
+	z-index: 1;
+	transition: color 0.3s;
 	background-color: transparent;
 }
 
 nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2.5px;
-    background: #bc964e;
-    transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
-    z-index: -1;
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.5px;
+	background: #bc964e;
+	transform: scaleX(0);
+	transition: transform 0.3s ease-in-out;
+	z-index: -1;
 }
 
 nav ul li a:hover {
-    color: #bc964e;
+	color: #bc964e;
 	background-color: transparent;
 }
 
 nav ul li a:hover::after {
-    transform: scaleX(1);
+	transform: scaleX(1);
 }
 
 nav ul li a.active {
-    color: #bc964e;
+	color: #bc964e;
 }
 
 nav ul li a.active:after {
-    transform: scaleX(1);
+	transform: scaleX(1);
 }
 
 nav ul {
-    flex-direction: column;
-    display: none;
-    position: absolute;
-    top: 55px;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    text-align: center;
-    padding: 20px 0;
+	flex-direction: column;
+	display: none;
+	position: absolute;
+	top: 55px;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	text-align: center;
+	padding: 20px 0;
 }
 
 nav ul.show {
-    display: flex;
+	display: flex;
 }
 
 nav ul li {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
 nav ul li a {
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
+	color: white;
+	padding: 10px 20px;
+	text-decoration: none;
+	font-size: 1.2em;
+	transition: background-color 0.3s ease;
 }
 
 nav ul hr {
-    display: block;
+	display: block;
 }
 /*-------------------------------------------*/
 
 /* Menu toggle - Hamburger */
 .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    cursor: pointer;
-    z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 30px;
+	height: 22px;
+	cursor: pointer;
+	z-index: 1000;
 }
 
 .menu-toggle div {
-    width: 100%;
-    height: 4px;
-    background-color: #fff;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+	width: 100%;
+	height: 4px;
+	background-color: #fff;
+	border-radius: 5px;
+	transition: all 0.3s ease;
 }
 
 /* Anima la trasformazione del pulsante */
 .menu-toggle.active .bar1 {
-    transform: rotate(-45deg) translate(-6px, 7.5px);
+	transform: rotate(-45deg) translate(-6px, 7.5px);
 }
 
 .menu-toggle.active .bar2 {
-    opacity: 0;
+	opacity: 0;
 }
 
 .menu-toggle.active .bar3 {
-    transform: rotate(45deg) translate(-5px, -6px);
+	transform: rotate(45deg) translate(-5px, -6px);
 }
 /*-------------------------------------------*/
 
 /* Scrollbar stile iOS */
 ::-webkit-scrollbar {
-    width: 0px;
+	width: 0px;
 	background: transparent;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.6);
 }
 
 * {
-    scrollbar-width: none;
-    scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
+	scrollbar-width: none;
+	scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
 }
 
 *::-ms-scrollbar {
-    width: 0px;
-    background: rgba(0, 0, 0, 0.1);
+	width: 0px;
+	background: rgba(0, 0, 0, 0.1);
 }
 
 *::-ms-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
 }
 
 *::-ms-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.6);
 }
 /*-------------------------------------------*/
 
 /* Stile del modulo */
 #upload-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 20px;
+	max-width: 400px;
+	margin: auto;
 }
 
 /* Stile dell'input file */
 #file {
-    display: none; /* Nascondi l'elemento originale */
+	display: none; /* Nascondi l'elemento originale */
 }
 
 /* Stile del label per il file input */
 #file + label {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
+	background-color: #333;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s ease;
 }
 
 #file + label:hover {
-    background-color: #555;
+	background-color: #555;
 }
 
 /* Aggiungi un'etichetta personalizzata per il file input */
 #upload-form input[type="file"] + label::after {
-    display: block;
+	display: block;
 }
 /***********************************************/
 
 /* Stili responsivi */
 @media only screen and (max-width: 1037px) {
-
-    /* Layout a una colonna per schermi piccoli */
-    #polaroid-container {
-        display: none; /* Nascondi le polaroid su schermi piccoli */
-    }
-
-    /* Testi e titoli */
-    h1 {
-        font-size: 2.5em;
-    }
-
-    h2 {
-        font-size: 1.8em;
-    }
-
-    p, a, button {
-        font-size: 1em;
-    }
-
-    nav ul {
-        flex-direction: column;
-        position: absolute;
-        top: 55px;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        display: none;
-        text-align: center;
-    }
-
-    nav ul.show {
-        display: flex;
+	/* Testi e titoli */
+	h1 {
+		font-size: 2.5em;
+	}
+	
+	h2 {
+		font-size: 1.8em;
+	}
+	
+	p, a, button {
+		font-size: 1em;
+	}
+	
+	nav ul {
+		flex-direction: column;
+		position: absolute;
+		top: 55px;
+		left: 0;
+		width: 100%;
+		background-color: #333;
+		display: none;
+		text-align: center;
+	}
+	
+	nav ul.show {
+		display: flex;
 		background: rgba(0, 0, 0, 0.8);
-    }
-
-    nav ul li {
-        margin: 10px 0;
-    }
-
-    nav a {
-        color: white;
-        padding: 10px;
-    }
-
-    /* Sezioni */
-    section {
-        padding: 20px;
-    }
-
-    /* Ridimensionamento delle immagini */
-    img {
-        width: 100%;
-        height: auto;
-    }
-
-    /* Pulsanti e link */
-    button, a {
-        padding: 10px 15px;
-    }
+	}
+	
+	nav ul li {
+		margin: 10px 0;
+	}
+	
+	nav a {
+		color: white;
+		padding: 10px;
+	}
+	
+	/* Sezioni */
+	section {
+		padding: 20px;
+	}
+	
+	/* Ridimensionamento delle immagini */
+	img {
+		width: 100%;
+		height: auto;
+	}
+	
+	/* Pulsanti e link */
+	button, a {
+		padding: 10px 15px;
+	}
 	
 	#home {
 		padding-top: 65px;
@@ -613,21 +607,21 @@ nav ul hr {
 
 /* Responsive adjustments */
 @media (min-width: 1150px) {
-    .menu-toggle {
-        display: none;
-    }
-
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        position: static;
-        background-color: transparent;
-        padding: 0;
-    }
-
-    nav ul li {
-        margin: 0 15px;
-    }
+	.menu-toggle {
+		display: none;
+	}
+	
+	nav ul {
+		display: flex;
+		flex-direction: row;
+		position: static;
+		background-color: transparent;
+		padding: 0;
+	}
+	
+	nav ul li {
+		margin: 0 15px;
+	}
 	
 	nav ul hr {
 		display: none;
