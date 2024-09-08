@@ -72,6 +72,110 @@ button:disabled {
 }
 /*-------------------------------------------*/
 
+/* Stile della barra di navigazione */
+nav {
+	position: fixed;
+	top: 0;
+	width: -webkit-fill-available;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(10px);
+}
+
+nav .logo-container {
+	display: flex;
+	align-items: center;
+}
+
+nav .logo {
+	height: 55px;
+	width: auto;
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+nav ul li {
+	position: relative;
+}
+
+nav ul {
+	flex-direction: column;
+	display: none;
+	position: absolute;
+	width: 100%;
+	background-color: #fff;
+	text-align: center;
+	padding: 20px 0;
+}
+
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px 15px;
+	display: block;
+	position: relative;
+	z-index: 1;
+	transition: color 0.3s;
+	background-color: transparent;
+}
+nav ul li a {
+	color: white;
+	padding: 10px 20px;
+	text-decoration: none;
+	font-size: 1.2em;
+	transition: background-color 0.3s ease;
+}
+
+nav ul li a::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.5px;
+	background: #bc964e;
+	transform: scaleX(0);
+	transition: transform 0.3s ease-in-out;
+	z-index: -1;
+}
+
+nav ul li a:hover {
+	color: #bc964e;
+	background-color: transparent;
+}
+
+nav ul li a:hover::after {
+	transform: scaleX(1);
+}
+
+nav ul li a.active {
+	color: #bc964e;
+}
+
+nav ul li a.active:after {
+	transform: scaleX(1);
+}
+
+nav ul hr {
+	display: block;
+}
+/*-------------------------------------------*/
+
 /* Stile comune delle sezioni */
 section {
 	padding: 100px 20px;
@@ -117,6 +221,7 @@ section {
 	z-index: 2;
 	overflow: hidden;
 }
+/*--------------------------------------------------------------------------------------*/
 
 /* HOME */
 #home {
@@ -166,17 +271,21 @@ section {
 }
 /*-------------------------------------------*/
 
+/* DETTAGLI */
 #details {
 	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
 	color: #333;
 }
+/*-------------------------------------------*/
 
+/* PRENOTAZIONI */
 #rsvp {
 	background: linear-gradient(rgba(235, 235, 235, 0.9), rgba(235, 235, 235, 0.9));
 	color: #333;
 }
+/*-------------------------------------------*/
 
-/* DONATIONS */
+/* DONAZIONI */
 #donations {
 	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
 	color: #333;
@@ -260,7 +369,7 @@ section {
 }
 /*-------------------------------------------*/
 
-/* Galleria Immagini */
+/* GALLERIA */
 #gallery {
 	background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9));
 	color: #333;
@@ -306,118 +415,22 @@ section {
 	background-color: transparent;
 	font-weight: bold;
 	padding: 0;
-}
-/*-------------------------------------------*/
-
-/* Stile della barra di navigazione */
-nav {
-	position: fixed;
-	top: 0;
-	width: -webkit-fill-available;
-	background: rgba(0, 0, 0, 0.8);
-	z-index: 1000;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(10px);
-}
-
-nav .logo-container {
-	display: flex;
-	align-items: center;
-}
-
-nav .logo {
-	height: 55px;
-	width: auto;
-}
-
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-}
-
-nav ul li {
-	margin: 0 15px;
 	position: relative;
 }
 
-nav ul li a {
-	color: white;
-	text-decoration: none;
-	font-size: 18px;
-	padding: 10px 15px;
-	display: block;
-	position: relative;
-	z-index: 1;
-	transition: color 0.3s;
-	background-color: transparent;
+.contact::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
 }
 
-nav ul li a::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 2.5px;
-	background: #bc964e;
-	transform: scaleX(0);
-	transition: transform 0.3s ease-in-out;
-	z-index: -1;
-}
-
-nav ul li a:hover {
-	color: #bc964e;
-	background-color: transparent;
-}
-
-nav ul li a:hover::after {
-	transform: scaleX(1);
-}
-
-nav ul li a.active {
-	color: #bc964e;
-}
-
-nav ul li a.active:after {
-	transform: scaleX(1);
-}
-
-nav ul {
-	flex-direction: column;
-	display: none;
-	position: absolute;
-	top: 55px;
-	left: 0;
-	width: 100%;
-	background-color: #fff;
-	text-align: center;
-	padding: 20px 0;
-}
-
-nav ul li {
-	margin: 10px 0;
-}
-
-nav ul li a {
-	color: white;
-	padding: 10px 20px;
-	text-decoration: none;
-	font-size: 1.2em;
-	transition: background-color 0.3s ease;
-}
-
-nav ul hr {
-	display: block;
+.contact:hover::after {
+    width: 100%;
 }
 /*-------------------------------------------*/
 
@@ -451,46 +464,6 @@ nav ul hr {
 
 .menu-toggle.active .bar3 {
 	transform: rotate(45deg) translate(-5px, -6px);
-}
-/*-------------------------------------------*/
-
-/* Scrollbar stile iOS */
-::-webkit-scrollbar {
-	width: 0px;
-	background: transparent;
-}
-
-::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.1);
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-	background: rgba(0, 0, 0, 0.4);
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(0, 0, 0, 0.6);
-}
-
-* {
-	scrollbar-width: none;
-	scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
-}
-
-*::-ms-scrollbar {
-	width: 0px;
-	background: rgba(0, 0, 0, 0.1);
-}
-
-*::-ms-scrollbar-thumb {
-	background: rgba(0, 0, 0, 0.4);
-	border-radius: 10px;
-}
-
-*::-ms-scrollbar-thumb:hover {
-	background: rgba(0, 0, 0, 0.6);
 }
 /*-------------------------------------------*/
 
@@ -631,3 +604,43 @@ nav ul hr {
 		display: none;
 	}
 }
+
+/* Scrollbar stile iOS */
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.6);
+}
+
+* {
+	scrollbar-width: none;
+	scrollbar-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
+}
+
+*::-ms-scrollbar {
+	width: 0px;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+*::-ms-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+}
+
+*::-ms-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.6);
+}
+/*-------------------------------------------*/
