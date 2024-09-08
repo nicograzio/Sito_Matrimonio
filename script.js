@@ -53,6 +53,7 @@ window.addEventListener('scroll', function() {
 document.querySelector('.menu-toggle').addEventListener('click', function() {
 	this.classList.toggle('active');
 	document.querySelector('nav ul').classList.toggle('show');
+	document.querySelector('body').classList.toggle('menu-active');
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -70,8 +71,6 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
         guests: event.target.guests.value,
         notes: event.target.notes.value
     };
-
-	console.log(formData);
 
     try {
         const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
@@ -128,36 +127,36 @@ function calculateSlidesPerView() {
 
 // Inizializza Swiper
 var swiper = new Swiper('.swiper-container', {
-    slidesPerView: calculateSlidesPerView(),
-    centeredSlides: true,
-    loop: true,
-    slideToClickedSlide: false,
-    spaceBetween: -5,  // Sovrapposizione leggera tra le slide
-    effect: 'coverflow',
-    coverflowEffect: {
+	slidesPerView: calculateSlidesPerView(),
+	centeredSlides: true,
+	loop: true,
+	slideToClickedSlide: false,
+	spaceBetween: -5,  // Sovrapposizione leggera tra le slide
+	effect: 'coverflow',
+	coverflowEffect: {
 		rotate: 0,
 		stretch: 0,
 		depth: 100,
 		modifier: 1,
 		slideShadows: false,
-    },
-    autoplay: {
+	},
+	autoplay: {
 		delay: 3000,  // 3 secondi
 		disableOnInteraction: false,  // Continua anche se l'utente interagisce
-    },
-    on: {
+	},
+	on: {
 		setTranslate: function() {
 			this.slides.forEach(function(slide) {
-			const slideProgress = slide.progress;
-			const scale = 1 - Math.abs(slideProgress) * 0.08;
-			const opacity = 1 - Math.abs(slideProgress) * 0.15;
-			const zIndex = 999 - Math.abs(slideProgress) * 10;  // Z-index decrescente
-			slide.style.transform = `scale(${scale})`;
-			slide.style.opacity = opacity;
-			slide.style.zIndex = Math.round(zIndex);
+				const slideProgress = slide.progress;
+				const scale = 1 - Math.abs(slideProgress) * 0.08;
+				const opacity = 1 - Math.abs(slideProgress) * 0.15;
+				const zIndex = 999 - Math.abs(slideProgress) * 10;  // Z-index decrescente
+				slide.style.transform = `scale(${scale})`;
+				slide.style.opacity = opacity;
+				slide.style.zIndex = Math.round(zIndex);
 			});
 		}
-    }
+	}
 });
 
 // Funzione per aggiornare slidesPerView su ridimensionamento della finestra
