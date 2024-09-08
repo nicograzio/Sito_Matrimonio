@@ -90,6 +90,7 @@ nav .logo-container {
 
 nav .logo {
 	height: 55px;
+	width: auto;
 }
 
 nav ul {
