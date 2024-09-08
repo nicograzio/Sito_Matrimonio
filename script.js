@@ -55,6 +55,13 @@ document.querySelector('.menu-toggle').addEventListener('click', function() {
 	document.querySelector('nav ul').classList.toggle('show');
 	document.querySelector('body').classList.toggle('menu-active');
 });
+
+// Nascondi il menu al click sui link delle sezioni 
+document.querySelector('nav ul li').addEventListener('click', function() {
+	document.querySelector('.menu-toggle').classList.remove('active');
+	document.querySelector('nav ul').classList.remove('show');
+	document.querySelector('body').classList.remove('menu-active');
+});
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Autoplay video
