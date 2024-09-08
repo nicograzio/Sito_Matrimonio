@@ -532,7 +532,7 @@ nav ul hr {
 /***********************************************/
 
 /* Stili responsivi */
-@media only screen and (max-width: 1037px) {
+@media only screen and (max-width: 1150px) {
 	/* Testi e titoli */
 	h1 {
 		font-size: 2.5em;
