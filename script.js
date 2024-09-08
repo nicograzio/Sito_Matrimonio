@@ -58,8 +58,10 @@ document.querySelector('.menu-toggle').addEventListener('click', function() {
 
 // Nascondi il menu al click sui link delle sezioni 
 document.querySelector('nav ul').addEventListener('click', function() {
-	document.querySelector('.menu-toggle').classList.remove('active');
-	document.querySelector('nav ul').classList.remove('show');
+	setTimeout(function() {
+		document.querySelector('.menu-toggle').classList.remove('active');
+		document.querySelector('nav ul').classList.remove('show');
+	}, 400); // 1000 ms = 1 sec
 	document.querySelector('body').classList.remove('menu-active');
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
