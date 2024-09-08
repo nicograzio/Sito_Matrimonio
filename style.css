@@ -8,6 +8,11 @@ body {
 	line-height: 1.6;
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden;
+}
+
+body.menu-active {
+	overflow: hidden;
 }
 
 h1, h2 {
@@ -399,10 +404,6 @@ nav ul {
 	padding: 20px 0;
 }
 
-nav ul.show {
-	display: flex;
-}
-
 nav ul li {
 	margin: 10px 0;
 }
@@ -555,14 +556,17 @@ nav ul hr {
 		display: none;
 		text-align: center;
 	}
-	
+
 	nav ul.show {
-		display: flex;
+		display: block;
+		overflow-y: auto;
+		max-height: calc(100vh - 70px);
 		background: rgba(0, 0, 0, 0.8);
 	}
 	
 	nav ul li {
-		margin: 10px 0;
+		margin: 10px auto;
+		width: fit-content;
 	}
 	
 	nav a {
