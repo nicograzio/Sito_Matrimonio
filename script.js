@@ -57,7 +57,7 @@ document.querySelector('.menu-toggle').addEventListener('click', function() {
 });
 
 // Nascondi il menu al click sui link delle sezioni 
-document.querySelector('nav ul li').addEventListener('click', function() {
+document.querySelector('nav ul').addEventListener('click', function() {
 	document.querySelector('.menu-toggle').classList.remove('active');
 	document.querySelector('nav ul').classList.remove('show');
 	document.querySelector('body').classList.remove('menu-active');
