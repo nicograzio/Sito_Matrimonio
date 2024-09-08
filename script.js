@@ -24,6 +24,11 @@ var countdown = setInterval(function() {
 }, 1000);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// Autoplay video
+let video = document.getElementById('bg-video');
+video.play();
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Aggiungi animazioni al caricamento delle sezioni
 let contents = document.querySelectorAll('.logo-image');
 let sections = document.querySelectorAll('section');
@@ -37,6 +42,12 @@ window.addEventListener('scroll', function() {
 		    content.style.transform = "translateY(" + content_move * 0.15 + "px";
 		}
 	});
+	
+	//Effetto Parallax su video
+	let video_move = video.getBoundingClientRect().top;
+	if (win_pos > video_move) {
+		video.style.transform = "translateY(" + video_move * -0.80 + "px";
+	}
 
 	// Selezione del link nella navbar in base alla sezione
 	sections.forEach((section, index) => {
@@ -65,11 +76,6 @@ document.querySelector('nav ul').addEventListener('click', function() {
 	document.querySelector('body').classList.remove('menu-active');
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-// Autoplay video
-var video = document.getElementById('bg-video');
-video.play();
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Invio dati del form per la prenotazione
 document.getElementById('reservation-form').addEventListener('submit', async function(event) {
@@ -106,24 +112,16 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
 const copyButton = document.getElementById('copy-button');
 const ibanText = document.getElementById('iban').textContent;
 const popup = document.getElementById('popup');
-
 copyButton.addEventListener('click', () => {
     // Copia il contenuto negli appunti
     navigator.clipboard.writeText(ibanText).then(() => {
         // Mostra il popup
-        popup.style.display = 'block';
         popup.style.opacity = '1';
         
         // Nasconde il popup dopo 3 secondi con animazione fade-out
         setTimeout(() => {
-            popup.classList.add('fade-out');
+            popup.style.opacity = '0';
         }, 2000);
-        
-        // Rimuove il popup completamente dopo 3.5 secondi
-        setTimeout(() => {
-            popup.style.display = 'none';
-            popup.classList.remove('fade-out');
-        }, 3500);
     });
 });
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
