@@ -398,6 +398,7 @@ section {
 	z-index: 5;
 	position: fixed;
 	height: calc(100% - 54px);
+	width: calc(100% - 40px);
 	top: 55px;
 	display: none;
 	overflow: auto;
@@ -623,15 +624,15 @@ button {
 /* Contenitore per l'immagine e i controlli di navigazione */
 .modal-content-container {
 	margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    position: absolute;
-    width: calc(100% - 80px);
-    height: calc(100% - 78px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+	margin-left: 40px;
+	margin-right: 40px;
+	position: absolute;
+	width: calc(100% - 80px);
+	height: calc(100% - 78px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
 }
 
 /* Stile per l'immagine nel modal */
