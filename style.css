@@ -588,7 +588,7 @@ section {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
-	justify-content: space-evenly;
+	justify-content: center;
 }
 
 .gallery img {
