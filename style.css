@@ -592,10 +592,11 @@ section {
 }
 
 .gallery img {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    cursor: pointer;
+	border-radius: 8px;
+	width: 150px;
+	height: 100px;
+	object-fit: cover;
+	cursor: pointer;
 }
 
 .buttons {
