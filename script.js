@@ -294,6 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 data.forEach((file) => {
                     if (file && (file.type.startsWith("image/") || /\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg|ico|heic|avif|raw|jfif)$/i.test(file.name))) {
+			const div = document.createElement("div"); // new
+			div.classList.add("img-container-div"); // new
                         const img = document.createElement("img");
                         img.src = file.download_url;
                         img.classList.add("gallery-image");
@@ -304,7 +306,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 openModal(this.src);
                             }
                         });
-                        imageGallery.appendChild(img);
+			div.appendChild(img); // new
+                        imageGallery.appendChild(div); // imageGallery.appendChild(img); 
                         images.push(file.download_url);
                     }
                 });
