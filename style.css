@@ -705,7 +705,7 @@ button {
 /* Effetto quando un'immagine è selezionata */
 .gallery-image.selected {
 	transform: scale(0.9);
-	border: 2px solid #4CAF50;
+	border: 2px solid #bc964e;
 }
 
 /* Spunta di selezione in alto a destra */
@@ -724,6 +724,6 @@ button {
 
 /* Stile del pulsante "Seleziona" quando attivo */
 #select-button.active {
-	background-color: #4CAF50;
+	background-color: #bc964e;
 	color: white;
 }
