@@ -19,6 +19,10 @@
         <div class="logo-container">
             <img src="logo.png" alt="Logo" class="logo">
         </div>
+		<p id="gallery-title">Galleria Immagini</p>
+		<div class="back-arrow">
+			<i class="fas fa-arrow-left"></i>
+		</div>
 		<div class="menu-toggle">
 			<div class="bar1"></div>
 			<div class="bar2"></div>
@@ -90,7 +94,7 @@
 	<!-- Donazione - Pagina che riporta il nostro IBAN per donazione (aggiungere evenntuale lista nozze) -->
     <section id="donations">
 		<img class="logo-image" src="logo.png">
-		<div class="content" style="overflow: visible">
+		<div class="content">
 			<h2>Donazioni e Regali</h2>
 			<p>Se desiderate farci un regalo, potete contribuire con una donazione al seguente IBAN:</p>
 			<div id="iban-container">
@@ -101,7 +105,8 @@
 		</div>
 		<div class="foot-overlay grey"></div>
 	</section>
-
+	
+	<!-- Locazione - Pagina che riporta la location del matrimonio e un link alla pagina della villa -->
     <section id="location">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
@@ -118,10 +123,12 @@
 		</div>
 		<div class="foot-overlay white"></div>
 	</section>
-
+	
+	<!-- Galleria - Preview della galleria che permette inoltre di caricare le foto -->
     <section id="gallery">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
+			<button id="button-gallery">Galleria Completa</button>
 			<h2>Galleria di Immagini</h2>
 			<p>Carica le tue foto o scarica quelle degli altri invitati:</p>
 			<div class="gallery-content">
@@ -150,7 +157,31 @@
 		</div>
 		<div class="foot-overlay grey"></div>
 	</section>
+	<!-- Galleria con tutte le immagini -->
+	<div id="complete-gallery">
+		<div class="gallery-container">
+			<div id="image-gallery" class="gallery">
+				<!-- Le immagini verranno caricate qui dinamicamente -->
+			</div>
+			<div class="buttons">
+				<button id="select-button">Seleziona</button>
+				<button id="download-button" disabled>Scarica</button>
+			</div>
+		</div>
 
+		<!-- Modal -->
+		<div id="modal" class="modal">
+			<span class="close"><i class="fa-solid fa-x"></i></span>
+			<div class="modal-content-container">
+				<img id="modal-image" class="modal-content">
+			</div>
+			<button class="prev">&#10094;</button>
+			<button class="next">&#10095;</button>
+			<button id="download-modal-button" class="download-modal-button">Scarica Immagine</button>
+		</div>
+	</div>
+	
+	<!-- Contatta - Pagina con i nostri contatti -->
     <section id="contacts">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
