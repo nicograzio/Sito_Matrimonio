@@ -397,7 +397,7 @@ section {
 	justify-content: center;
 	z-index: 5;
 	position: fixed;
-	height: calc(100% - 54px);
+	height: calc(100% - 95px);
 	width: calc(100% - 40px);
 	top: 55px;
 	display: none;
