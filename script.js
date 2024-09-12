@@ -80,15 +80,18 @@ document.querySelector('nav ul').addEventListener('click', function() {
 // Invio dati del form per la prenotazione
 document.getElementById('reservation-form').addEventListener('submit', async function(event) {
     event.preventDefault();
+	
+	// Mostra lo spinner
+    document.getElementById('spinnerContainer-rsvp').style.display = "block";
 
     const formData = {
         name: event.target.name.value,
         guests: event.target.guests.value,
         notes: event.target.notes.value
     };
-
+	
     try {
-        const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation', { //'https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation'
+        const response = await fetch('https://matrimonio-nicholas-e-carlott.netlify.app/.netlify/functions/submit-reservation', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
@@ -96,15 +99,19 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
             }
         });
 
-        if (response.ok) {
+        if (response.ok)
             alert('Prenotazione inviata con successo!');
-        } else {
+        else
             alert('Errore durante l\'invio della prenotazione.');
-        }
+		
     } catch (error) {
         alert('Errore durante l\'invio della prenotazione.');
         console.error(error);
     }
+	
+	// Nascondi lo spinner
+	document.getElementById('spinnerContainer-rsvp').style.display = "none";
+	
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -201,6 +208,10 @@ document.getElementById('file').addEventListener('change', function() {
 // Invio delle foto dal form nella gallery
 document.getElementById('upload-form').addEventListener('submit', async function(event) {
 	event.preventDefault();
+	
+	// Mostra lo spinner
+	document.getElementById('spinnerContainer-gallery').style.display = "block";
+	
 	const files = document.getElementById('file').files;
 	const fileArray = [];
 	const timestamp = Date.now();
@@ -215,25 +226,26 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		});
 	}
 	try {
-	const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
-		method: 'POST',
-		body: JSON.stringify({ files: fileArray }),
-		headers: { 'Content-Type': 'application/json' }
-	});
-	
-	if(response.ok) {
-		const result = await response.json();
-		//document.getElementById('upload-status').innerText = result.message;
-		alert(result.message);
-	}
-	else
-		alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
+		const response = await fetch('https://matrimonio-nicholas-e-carlott.netlify.app/.netlify/functions/upload-to-github', {
+			method: 'POST',
+			body: JSON.stringify({ files: fileArray }),
+			headers: { 'Content-Type': 'application/json' }
+		});
+		
+		if(response.ok) {
+			const result = await response.json();
+			alert(result.message);
+		}
+		else
+			alert('Si è verificato un errore, ti preghiamo di riprovare più tardi.');
 	
 	} catch (error) {
 		alert('Errore nel caricamento! Ti preghiamo di riprovare più tardi.\nNel caso il problema persista puoi contattare Nicholas.');
-		//document.getElementById('upload-status').innerText = 'Errore nel caricamento delle foto';
 		console.error('Errore:', error);
 	}
+	
+	// Nascondi lo spinner
+	document.getElementById('spinnerContainer-gallery').style.display = "none";
 
 	function toBase64(file) {
 		return new Promise((resolve, reject) => {
@@ -452,3 +464,69 @@ document.addEventListener("DOMContentLoaded", function () {
     // Carica le immagini all'avvio della pagina
     loadImages();
 });
+
+//Gestione Cookies
+window.onload = function() {
+    let cookieConsent = getCookie("cookie_consent");
+	console.log(cookieConsent);
+    
+    if (cookieConsent === "true") {
+        loadAnalytics();
+        loadGoogleMaps();
+        document.getElementById('cookie-banner').style.display = 'none';
+    } else if (cookieConsent === "false") {
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    document.getElementById('accept').onclick = function() {
+        setCookie("cookie_consent", "true", 365);
+        loadAnalytics();
+        loadGoogleMaps();
+        document.getElementById('cookie-banner').style.display = 'none';
+    };
+
+    document.getElementById('reject').onclick = function() {
+        setCookie("cookie_consent", "false", 365);
+        document.getElementById('cookie-banner').style.display = 'none';
+    };
+};
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function loadGoogleMaps() {
+    let mapFrame = document.getElementById('gmap_canvas');
+    if (!mapFrame.src) {
+        mapFrame.src = "https://maps.google.com/maps?q=corte+di+villa+spalletti&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed";
+    }
+}
+
+function loadAnalytics() {
+    // Carica Google Analytics solo se l'utente ha accettato
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXXXX-Y', 'auto', { cookieFlags: 'SameSite=None; Secure' });
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
