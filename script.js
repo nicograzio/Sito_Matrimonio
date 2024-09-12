@@ -294,8 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 data.forEach((file) => {
                     if (file && (file.type.startsWith("image/") || /\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg|ico|heic|avif|raw|jfif)$/i.test(file.name))) {
-			const div = document.createElement("div"); // new
-			div.classList.add("img-container-div"); // new
+						const div = document.createElement("div"); // new
+						div.classList.add("img-container-div"); // new
                         const img = document.createElement("img");
                         img.src = file.download_url;
                         img.classList.add("gallery-image");
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 openModal(this.src);
                             }
                         });
-			div.appendChild(img); // new
+						div.appendChild(img); // new
                         imageGallery.appendChild(div); // imageGallery.appendChild(img); 
                         images.push(file.download_url);
                     }
@@ -331,10 +331,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const isSelected = selectedImages.has(img.src);
         if (isSelected) {
             selectedImages.delete(img.src);
+			img.parentElement.classList.remove("selected");
             img.classList.remove("selected");
         } else {
             selectedImages.add(img.src);
             img.classList.add("selected");
+			img.parentElement.classList.add("selected");
         }
         updateDownloadButton();
     }
@@ -389,11 +391,13 @@ document.addEventListener("DOMContentLoaded", function () {
     selectButton.onclick = function () {
         isSelecting = !isSelecting;
         if (isSelecting) {
-            selectButton.textContent = "Annulla Selezione";
+            selectButton.textContent = "Annulla";
             selectButton.classList.add("active");
+			downloadButton.style.display = "block";
         } else {
             selectButton.textContent = "Seleziona";
             selectButton.classList.remove("active");
+			downloadButton.style.display = "none";
             clearSelections();
         }
     };
@@ -402,7 +406,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function clearSelections() {
         selectedImages.clear();
         const selectedElements = document.querySelectorAll(".gallery-image.selected");
-        selectedElements.forEach(img => img.classList.remove("selected"));
+        selectedElements.forEach(img => {
+			img.classList.remove("selected");
+			img.parentElement.classList.remove("selected");
+		});
         updateDownloadButton();
     }
 
@@ -445,4 +452,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Carica le immagini all'avvio della pagina
     loadImages();
 });
-
