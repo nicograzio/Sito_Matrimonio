@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
     <title>Matrimonio Nicholas & Carlotta</title>
     <!-- Favicon - Logo del Matrimonio -->
     <link rel="icon" href="logo.png" type="image/png">
@@ -77,13 +78,13 @@
 			<h2>Conferma la tua partecipazione</h2>
 			<form id="reservation-form">
 				<label for="name">Nome e Cognome:</label>
-				<input type="text" id="name" name="name" required>
+				<input type="text" id="name" name="name" placeholder="Es. Mario Rossi o Fam. Rossi" required>
 
 				<label for="guests">Numero di invitati:</label>
 				<input type="number" id="guests" name="guests" required>
 
 				<label for="notes">Richieste o Note particolari:</label>
-				<textarea id="notes" name="notes"></textarea>
+				<textarea id="notes" name="notes" placeholder="Facci sapere le tue richieste, intolleranze, ecc..."></textarea>
 
 				<button type="submit">Conferma</button>
 			</form>
@@ -164,8 +165,8 @@
 				<!-- Le immagini verranno caricate qui dinamicamente -->
 			</div>
 			<div class="buttons">
+				<button id="download-button" disabled><i class="fas fa-download"></i></button>
 				<button id="select-button">Seleziona</button>
-				<button id="download-button" disabled>Scarica</button>
 			</div>
 		</div>
 
