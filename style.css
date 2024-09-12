@@ -71,6 +71,24 @@ button:disabled {
 	cursor: not-allowed;
 	opacity: 0.8;
 }
+
+.spinnerContainer {
+	display: none;
+}
+
+.spinner {
+    border: 5px solid #333; /* Colore di sfondo */
+    border-top: 5px solid #bc964e; /* Colore dell'animazione */
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 /*-------------------------------------------*/
 
 /* Stile della barra di navigazione */
@@ -334,6 +352,15 @@ section {
 	color: #333;
 }
 
+#location a {
+	color: #333;
+	border: none;
+	background-color: transparent;
+	font-weight: bold;
+	padding: 0;
+	position: relative;
+}
+
 .mapouter {
 	position: relative;
 	text-align: right;
@@ -437,6 +464,21 @@ section {
 
 .contact:hover::after {
     transform: scaleX(1);
+}
+/*-------------------------------------------*/
+
+/* COOKIES */
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(2px);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 5000;
+    display: none; /* Il banner apparirà solo se l'utente non ha scelto */
 }
 /*-------------------------------------------*/
 
