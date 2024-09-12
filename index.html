@@ -78,7 +78,7 @@
 			<h2>Conferma la tua partecipazione</h2>
 			<form id="reservation-form">
 				<label for="name">Nome e Cognome:</label>
-				<input type="text" id="name" name="name" placeholder="Es. Mario Rossi o Fam. Rossi" required>
+				<input type="text" id="name" name="name" autocomplete="name" placeholder="Es. Mario Rossi o Fam. Rossi" required>
 
 				<label for="guests">Numero di invitati:</label>
 				<input type="number" id="guests" name="guests" required>
@@ -87,6 +87,10 @@
 				<textarea id="notes" name="notes" placeholder="Facci sapere le tue richieste, intolleranze, ecc..."></textarea>
 
 				<button type="submit">Conferma</button>
+				
+				<div id="spinnerContainer-rsvp" class="spinnerContainer">
+					<div class="spinner"></div>
+				</div>
 			</form>
 		</div>
 		<div class="foot-overlay white"></div>
@@ -113,7 +117,7 @@
 		<div class="content">
 			<h2>Location della Cerimonia</h2>
 			<p>La cerimonia e il ricevimento si terranno presso:</p>
-			<p><strong>Corte di Villa Spalletti: Via Franceschini, 11, 42013 San Donnino di Liguria RE</strong></p>
+			<p><strong><a href="https://www.cortespalletti.it/" target="_blank" class="contact">Corte di Villa Spalletti: Via Franceschini, 11, 42013 San Donnino di Liguria RE</a></strong></p>
 			<div id="map" style="padding-top: 15px;">
 				<div class="mapouter">
 					<div class="gmap_canvas">
@@ -153,7 +157,9 @@
 				<label for="file" id="file-label">Seleziona file</label>
 				<span id="file-name"></span>
 				<button id="submit-photos" type="submit" disabled>Carica Foto</button>
-				<p id="upload-status"></p>
+				<div id="spinnerContainer-gallery" class="spinnerContainer">
+					<div class="spinner"></div>
+				</div>
 			</form>
 		</div>
 		<div class="foot-overlay grey"></div>
@@ -197,6 +203,12 @@
 		</div>
 		<div class="foot-overlay white"></div>
 	</section>
+	
+	<div id="cookie-banner">
+	  Questo sito utilizza i cookie per migliorare la tua esperienza. 
+	  <button id="accept">Accetta</button>
+	  <button id="reject">Rifiuta</button>
+	</div>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
