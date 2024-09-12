@@ -260,12 +260,21 @@ section {
 	background: rgba(235, 235, 235, 1);
 	color: #333;
 }
+
+#rsvp button {
+	margin: 20px;
+    font-size: 22px;
+}
 /*-------------------------------------------*/
 
 /* DONAZIONI */
 #donations {
 	background: rgba(253, 253, 253, 1);
 	color: #333;
+}
+
+#donations .content {
+	padding-bottom: 30px;
 }
 
 #iban-container {
@@ -393,17 +402,8 @@ section {
 	background-color: #555;
 }
 
-#complete-gallery {
-	justify-content: center;
-	z-index: 5;
-	position: fixed;
-	height: calc(100% - 95px);
-	width: calc(100% - 40px);
-	top: 55px;
-	display: none;
-	overflow: auto;
-	background: #fff;
-	padding: 20px;
+#submit-photos {
+	font-size: 22px;
 }
 /*-------------------------------------------*/
 
@@ -560,6 +560,18 @@ section {
 
 
 
+#complete-gallery {
+	justify-content: center;
+	z-index: 5;
+	position: fixed;
+	height: calc(100% - 54px);
+	width: 100%;
+	top: 55px;
+	display: none;
+	overflow: auto;
+	background: #fff;
+}
+
 .gallery-show {
 	display: none;
 }
@@ -582,26 +594,31 @@ section {
 .gallery-container {
 	max-width: calc(100% - 40px);
 	text-align: center;
+	margin-top: 8px;
 }
 
 .gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 5px;
+	gap: 1px;
 	justify-content: center;
 }
 
 .gallery img {
 	border: 2px solid #fff;
 	border-radius: 8px;
-	width: 150px;
+	width: 130px;
 	height: 100px;
 	object-fit: cover;
 	cursor: pointer;
 }
 
 .buttons {
-	margin-top: 20px;
+	position: fixed;
+    top: 65px;
+    right: 10px;
+	display: flex;
+	z-index: 11;
 }
 
 button {
@@ -709,22 +726,53 @@ button {
 	border: 2px solid #bc964e;
 }
 
+.img-container-div {
+	position: relative;
+}
+
 /* Spunta di selezione in alto a destra */
-.gallery-image.selected::before {
+.img-container-div.selected::after {
 	content: "✓";
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	background-color: rgba(0, 128, 0, 0.8);
-	color: white;
-	font-size: 16px;
-	padding: 2px 5px;
-	border-radius: 50%;
-	z-index: 10;
+    position: absolute;
+    bottom: 18px;
+    right: 11px;
+    background-color: #bc964eee;
+	backdrop-filter: blur(1px);
+    color: white;
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 50%;
+    z-index: 10;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+	border: 1px solid #fff;
+}
+
+#select-button {
+	font-size: 17px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 14px;
+    backdrop-filter: blur(1px);
+    background: #333c;
+}
+
+#download-button {
+	display: none;
+	font-size: 17px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 14px;
+    backdrop-filter: blur(1px);
+    background: #333c;
 }
 
 /* Stile del pulsante "Seleziona" quando attivo */
 #select-button.active {
-	background-color: #bc964e;
+	background-color: #bc964ecc;
 	color: white;
 }
