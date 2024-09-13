@@ -468,7 +468,6 @@ document.addEventListener("DOMContentLoaded", function () {
 //Gestione Cookies
 window.onload = function() {
     let cookieConsent = getCookie("cookie_consent");
-	console.log(cookieConsent);
     
     if (cookieConsent === "true") {
         loadAnalytics();
@@ -476,6 +475,9 @@ window.onload = function() {
         document.getElementById('cookie-banner').style.display = 'none';
     } else if (cookieConsent === "false") {
         document.getElementById('cookie-banner').style.display = 'none';
+    } else {
+        // Se non esiste un cookie, mostra il banner
+        document.getElementById('cookie-banner').style.display = 'block';
     }
 
     document.getElementById('accept').onclick = function() {
