@@ -343,12 +343,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const isSelected = selectedImages.has(img.src);
         if (isSelected) {
             selectedImages.delete(img.src);
-			img.parentElement.classList.remove("selected");
+	    img.parentElement.classList.remove("selected");
             img.classList.remove("selected");
         } else {
+	    if (selectedImages.length > 4) {
+		alert("Puoi selezionare un massimo di 20 immagini per ogni singolo download.");
+		return;
+	    }
             selectedImages.add(img.src);
             img.classList.add("selected");
-			img.parentElement.classList.add("selected");
+	    img.parentElement.classList.add("selected");
         }
         updateDownloadButton();
     }
