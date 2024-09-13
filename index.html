@@ -2,24 +2,23 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light only">
-    <title>Matrimonio Nicholas & Carlotta</title>
-    <!-- Favicon - Logo del Matrimonio -->
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light only">
+	<title>Matrimonio Nicholas & Carlotta</title>
+	<link rel="icon" href="logo.png" type="image/png">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
 
 <body>
 	<!-- Navigation Bar - responsive -->
-    <nav>
-        <div class="logo-container">
-            <img src="logo.png" alt="Logo" class="logo">
-        </div>
+	<nav>
+		<div class="logo-container">
+		    <img src="logo.png" alt="Logo" class="logo">
+		</div>
 		<p id="gallery-title">Galleria Immagini</p>
 		<div class="back-arrow">
 			<i class="fas fa-arrow-left"></i>
@@ -29,63 +28,62 @@
 			<div class="bar2"></div>
 			<div class="bar3"></div>
 		</div>
-        <ul>
-            <li><a href="#home" class="active">Home</a></li>
-			<hr>
-            <li><a href="#details">Dettagli</a></li>
-			<hr>
-            <li><a href="#rsvp">RSVP</a></li>
-			<hr>
-            <li><a href="#donations">Donazioni</a></li>
-			<hr>
-            <li><a href="#location">Location</a></li>
-			<hr>
-            <li><a href="#gallery">Galleria</a></li>
-			<hr>
-            <li><a href="#contacts">Contatti</a></li>
-        </ul>
-    </nav>
+		<ul>
+		    <li><a href="#home" class="active">Home</a></li>
+				<hr>
+		    <li><a href="#details">Dettagli</a></li>
+				<hr>
+		    <li><a href="#rsvp">RSVP</a></li>
+				<hr>
+		    <li><a href="#donations">Donazioni</a></li>
+				<hr>
+		    <li><a href="#location">Location</a></li>
+				<hr>
+		    <li><a href="#gallery">Galleria</a></li>
+				<hr>
+		    <li><a href="#contacts">Contatti</a></li>
+		</ul>
+	</nav>
 
 	<!-- Home - video e countdown -->
-    <section id="home">
-        <video autoplay muted loop playsinline id="bg-video" poster="poster.jpg">
-            <source src="video.mp4" type="video/mp4">
-            Il tuo browser non supporta i video HTML5.
-        </video>
-        <div class="overlay">
-            <!-- <h1>Il Matrimonio di Nicholas e Carlotta</h1> -->
-            <div id="countdown">
-					<p id="time"></p>
-            </div>
-        </div>
+	<section id="home">
+		<video autoplay muted loop playsinline id="bg-video" poster="poster.jpg">
+		    <source src="video.mp4" type="video/mp4">
+		    Il tuo browser non supporta i video HTML5.
+		</video>
+		<div class="overlay">
+		    <div id="countdown">
+			<p id="time"></p>
+		    </div>
+		</div>
 		<div class="foot-overlay white"></div>
-    </section>
+	</section>
 
 	<!-- Dettagli - Programma del matrimonio con orari e descrizioni -->
-    <section id="details">
+	<section id="details">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Dettagli della Giornata</h2>
 			<p>Orari di arrivo, programma, menu e altre informazioni.</p>
 		</div>
 		<div class="foot-overlay grey"></div>
-    </section>
+	</section>
 
 	<!-- Prenotazione - Gli ospiti potranno inviarci la loro presenza -->
-    <section id="rsvp">
+	<section id="rsvp">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Conferma la tua partecipazione</h2>
 			<form id="reservation-form">
 				<label for="name">Nome e Cognome:</label>
 				<input type="text" id="name" name="name" autocomplete="name" placeholder="Es. Mario Rossi o Fam. Rossi" required>
-
+	
 				<label for="guests">Numero di invitati:</label>
-				<input type="number" id="guests" name="guests" required>
-
+				<input type="number" id="guests" name="guests" min="1" required>
+	
 				<label for="notes">Richieste o Note particolari:</label>
 				<textarea id="notes" name="notes" placeholder="Facci sapere le tue richieste, intolleranze, ecc..."></textarea>
-
+	
 				<button type="submit">Conferma</button>
 				
 				<div id="spinnerContainer-rsvp" class="spinnerContainer">
@@ -94,10 +92,10 @@
 			</form>
 		</div>
 		<div class="foot-overlay white"></div>
-    </section>
+	</section>
 
 	<!-- Donazione - Pagina che riporta il nostro IBAN per donazione (aggiungere evenntuale lista nozze) -->
-    <section id="donations">
+	<section id="donations">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Donazioni e Regali</h2>
@@ -112,7 +110,7 @@
 	</section>
 	
 	<!-- Locazione - Pagina che riporta la location del matrimonio e un link alla pagina della villa -->
-    <section id="location">
+    	<section id="location">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Location della Cerimonia</h2>
@@ -130,7 +128,7 @@
 	</section>
 	
 	<!-- Galleria - Preview della galleria che permette inoltre di caricare le foto -->
-    <section id="gallery">
+	<section id="gallery">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<button id="button-gallery">Galleria Completa</button>
@@ -189,7 +187,7 @@
 	</div>
 	
 	<!-- Contatta - Pagina con i nostri contatti -->
-    <section id="contacts">
+	<section id="contacts">
 		<img class="logo-image" src="logo.png">
 		<div class="content">
 			<h2>Contatti</h2>
@@ -205,12 +203,12 @@
 	</section>
 	
 	<div id="cookie-banner">
-	  Questo sito utilizza i cookie per migliorare la tua esperienza. 
-	  <button id="accept">Accetta</button>
-	  <button id="reject">Rifiuta</button>
+		Questo sito utilizza i cookie per migliorare la tua esperienza. 
+		<button id="accept">Accetta</button>
+		<button id="reject">Rifiuta</button>
 	</div>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script src="script.js"></script>
 </body>
 </html>
