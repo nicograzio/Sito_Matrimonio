@@ -301,6 +301,7 @@ let currentIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
     // Carica le immagini all'avvio della pagina
     fetchImagesURLs();
+	checkCookieAcceptance();
 });
 
 // Funzione per caricare immagini dalla repository GitHub
@@ -350,39 +351,10 @@ function loadImages() {
 
 // Carica le prime immagini al caricamento della pagina
 completeGallery.addEventListener('scroll', () => {
-    if (completeGallery.clientHeight + completeGallery.scrollTop >= completeGallery.scrollHeight - 10) {
+    if (completeGallery.clientHeight + completeGallery.scrollTop >= completeGallery.scrollHeight - 5) {
         loadImages();
     }
 });
-
-/*let lastY = 0; // Posizione verticale dell'ultimo tocco
-
-imageGallery.addEventListener('touchstart', (event) => {
-    lastY = event.touches[0].clientY; // Salva la posizione iniziale
-});
-
-imageGallery.addEventListener('touchmove', (event) => {
-    const touch = event.touches[0];
-    const currentY = touch.clientY;
-
-    if (currentY < lastY) {
-        loadImages();
-    } else if (currentY > lastY) {
-        console.log('Scroll giù');
-    }
-
-    lastY = currentY; // Aggiorna la posizione per il prossimo movimento
-});
-
-imageGallery.addEventListener('wheel', (event) => {
-    console.log('Scroll evento rilevato:', event.deltaY);
-    if (event.deltaY < 0) {
-		console.log('Scroll Su');
-        loadImages();
-    } else {
-        console.log('Scroll giù');
-    }
-});*/
 
 // Funzione per aprire il modal con l'immagine
 function openModal(src) {
@@ -591,9 +563,9 @@ function selectPhotos(array, photoToSelect = slidePhotos.length) {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //Gestione Cookies
-window.onload = function() {
+function checkCookieAcceptance() {
     let cookieConsent = getCookie("cookie_consent");
-    
+	
     if (cookieConsent === "true") {
         loadAnalytics();
         loadGoogleMaps();
@@ -625,7 +597,7 @@ function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	document.cookie = name + "=" + encodeURIComponent(value || "") + expires + "; path=/; SameSite=None; Secure"";
 }
 
 function getCookie(name) {
