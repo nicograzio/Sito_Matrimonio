@@ -39,7 +39,7 @@ exports.handler = async (event, context) => {
 
   // Loop per caricare i file su GitHub
   for (const { fileContent, fileName } of files) {
-    const filePath = `images/${fileName}`;
+    const filePath = `photosToCheck/${fileName}`;
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
     const requestBody = {
