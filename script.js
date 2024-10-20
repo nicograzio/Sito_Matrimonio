@@ -309,12 +309,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	checkCookieAcceptance();
     // Carica le immagini all'avvio della pagina
     fetchImagesURLs();
-	// Aggiustamento dei contatti
-	if(window.innerWidth <= 400)
-	{
-		document.getElementById("tel1").innerHTML = "<br>+39 3387747479";
-		document.getElementById("tel2").innerHTML = "<br>+39 3934455956";
-	}
 });
 
 // Funzione per caricare immagini dalla repository GitHub

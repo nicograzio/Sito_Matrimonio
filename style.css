@@ -17,7 +17,7 @@ body.gallery-active {
 }
 
 h2 {
-	font-size: 3.5em;
+	font-size: clamp(20px, 5.2vw, 56px);
 	margin-bottom: 20px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 	text-align: center;
@@ -25,7 +25,7 @@ h2 {
 
 p, ul, form {
 	margin: 0 auto;
-	font-size: 1.5em;
+	font-size: clamp(14px, 4vw, 50px);
 	text-align: center;
 	list-style-position: inside;
 }
@@ -298,7 +298,7 @@ section {
 }
 
 #donations .content {
-	padding-bottom: 35px;
+	padding-bottom: 52px;
 }
 
 #iban-container {
@@ -317,7 +317,7 @@ section {
 #iban {
 	margin: 0;
 	padding: 0 10px;
-	font-size: 1.05em;
+	font-size: clamp(14px, 4vw, 50px);
 }
 
 #popup {
@@ -329,7 +329,7 @@ section {
 	color: #fff;
 	padding: 5px 10px;
 	border-radius: 5px;
-	font-size: 14px;
+	font-size: clamp(14px, 3vw, 20px);
 	opacity: 0;
 	transition: opacity 0.6s ease-out; /* Animazione di fade in / out */
 }
@@ -478,6 +478,11 @@ section {
 .contact:hover::after {
     transform: scaleX(1);
 }
+
+#contactsList {
+	list-style: none;
+	padding: 0;
+}
 /*-------------------------------------------*/
 
 /* COOKIES */
@@ -500,15 +505,6 @@ section {
 	/* Classe per il body per prevenire prevenire lo scorrimento */
 	body.menu-active {
 		overflow: hidden;
-	}
-	
-	/* Testi e titoli */	
-	h2 {
-		font-size: 2.2em;
-	}
-	
-	p, a, button {
-		font-size: 1.5em;
 	}
 	
 	nav ul {
@@ -694,7 +690,7 @@ button {
 	padding: 10px 15px;
 	margin: 0 5px;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: clamp(14px, 4vw, 50px);
 }
 
 /* Stile per il modal */
