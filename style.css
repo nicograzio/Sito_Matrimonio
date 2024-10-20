@@ -43,11 +43,16 @@ input, textarea, button {
 	border: none;
 	font-size: 1em;
 	outline: none;
+	font-family: 'Dancing Script', cursive; /* Cambia il font */
 }
 
 input, textarea {
 	width: 100%;
 	max-width: 500px;
+}
+
+input::placeholder, textarea::placeholder {
+    font-family: 'Dancing Script', cursive; /* Cambia il font */
 }
 
 /* Pulsanti e link */
