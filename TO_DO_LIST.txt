@@ -1,5 +1,10 @@
-1. Inserire una galleria di immagini scorrevole (già sviluppata) che prenda un pool di immagini da caricare nella sezione principale del sito (es 10 o 20 immagini, per non appesantire troppo la pagina)
 
-2. aggiungere logica lazy per ridurre il caricamento delle foto nella galleria
 
-3. migliorare la visualizzazione sia su schermi grandi che su schermi piccoli (prioritaria per i piccoli)
+1. migliorare la visualizzazione sia su schermi grandi che su schermi piccoli (prioritaria per i piccoli)
+
+2. usa questo metodo per rendere il testo responsive
+p {
+  font-size: clamp(1rem, 2.5vw, 2rem); /* Minimo 1rem, massimo 2rem, e cresce in base alla viewport */
+}
+
+oppure solo vw
