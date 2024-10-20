@@ -499,7 +499,7 @@ section {
 	
 	/* Testi e titoli */	
 	h2 {
-		font-size: 1.8em;
+		font-size: 2.2em;
 	}
 	
 	p, a, button {
@@ -544,6 +544,10 @@ section {
 	/* Pulsanti e link */
 	button, a {
 		padding: 10px 15px;
+	}
+	
+	#time {
+		font-size: 1em;
 	}
 }
 
@@ -647,6 +651,10 @@ section {
 	max-width: calc(100% - 40px);
 	text-align: center;
 	margin-top: 8px;
+}
+
+.gallery-content {
+	padding-top: 15px;
 }
 
 .gallery {
