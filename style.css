@@ -312,6 +312,7 @@ section {
 #iban {
 	margin: 0;
 	padding: 0 10px;
+	font-size: 1.05em;
 }
 
 #popup {
@@ -502,7 +503,7 @@ section {
 	}
 	
 	p, a, button {
-		font-size: 1em;
+		font-size: 1.5em;
 	}
 	
 	nav ul {

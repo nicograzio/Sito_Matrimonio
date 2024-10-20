@@ -327,7 +327,7 @@ function fetchImagesURLs() {
 }
 
 let currentIndexToLoad = 0;
-const imagesPerLoad = 1; // Numero di immagini da caricare per volta (da modificare in base al tipo di schermo)
+const imagesPerLoad = 10; // Numero di immagini da caricare per volta (da modificare in base al tipo di schermo)
 
 // Funzione per caricare immagini in blocchi
 function loadImages() {
