@@ -1,14 +1,5 @@
 1. Inserire una galleria di immagini scorrevole (già sviluppata) che prenda un pool di immagini da caricare nella sezione principale del sito (es 10 o 20 immagini, per non appesantire troppo la pagina)
 
-2. creare un bottone che apre un altra sezione del sito, chiamata "galleria immagini". In tale sezione sara possibile vedere tutte le immagini come su un iphone. Le azioni che si potranno fare sono:
-  - selezionare una o più immagini e scarciarle
-  - scorrere le immagini della galleria
-  - aprire la visualizzazione a pagina intera della foto, da tale pagina sarà possibile scaricare la singola foto sul proprio dispositivo.
-  - aggiungere logica lazy per ridurre il caricamento delle foto nella galleria
+2. aggiungere logica lazy per ridurre il caricamento delle foto nella galleria
 
 3. migliorare la visualizzazione sia su schermi grandi che su schermi piccoli (prioritaria per i piccoli)
-
-4. pensare a come gestire l'invio della prenotazione:
-  - creazione di un file JSON che sarà arrichito di volta in volta
-  - creazione di un CSV
-  - creazione di un DB

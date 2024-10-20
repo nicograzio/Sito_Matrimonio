@@ -267,6 +267,8 @@ galleryButton.addEventListener('click', () => {
 	galleryButtonGoBack.style.display = 'block';
 	document.querySelector('.menu-toggle').classList.toggle('gallery-show');
     document.querySelector("nav ul").classList.toggle('gallery-show');
+	while(completeGallery.scrollHeight <= completeGallery.clientHeight && currentIndexToLoad < images.length)
+		loadImages();
 });
 
 // Funzione per tornare indietro dalla galleria completa la galleria completa
@@ -280,194 +282,313 @@ galleryButtonGoBack.addEventListener('click', () => {
 });
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+const completeGallery = document.getElementById("complete-gallery");
+const imageGallery = document.getElementById("image-gallery");
+const modal = document.getElementById("modal");
+const modalImage = document.getElementById("modal-image");
+const closeModal = document.querySelector(".close");
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+const selectButton = document.getElementById("select-button");
+const downloadButton = document.getElementById("download-button");
+const downloadModalButton = document.getElementById("download-modal-button");
+
+let images = [];
+let selectedImages = new Set();
+let isSelecting = false;
+let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
-    const imageGallery = document.getElementById("image-gallery");
-    const modal = document.getElementById("modal");
-    const modalImage = document.getElementById("modal-image");
-    const closeModal = document.querySelector(".close");
-    const prev = document.querySelector(".prev");
-    const next = document.querySelector(".next");
-    const selectButton = document.getElementById("select-button");
-    const downloadButton = document.getElementById("download-button");
-    const downloadModalButton = document.getElementById("download-modal-button");
-
-    let images = [];
-    let selectedImages = new Set();
-    let isSelecting = false;
-    let currentIndex = 0;
-
-    // Funzione per caricare immagini dalla repository GitHub
-    function loadImages() {
-        const apiUrl = "https://api.github.com/repos/nicograzio/Sito_Matrimonio/contents/images";
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                data.forEach((file) => {
-                    if (file && (file.type.startsWith("image/") || /\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg|ico|heic|avif|raw|jfif)$/i.test(file.name))) {
-						const div = document.createElement("div"); // new
-						div.classList.add("img-container-div"); // new
-                        const img = document.createElement("img");
-                        img.src = file.download_url;
-                        img.classList.add("gallery-image");
-                        img.addEventListener("click", function () {
-                            if (isSelecting) {
-                                toggleSelection(this);
-                            } else {
-                                openModal(this.src);
-                            }
-                        });
-						div.appendChild(img); // new
-                        imageGallery.appendChild(div); // imageGallery.appendChild(img); 
-                        images.push(file.download_url);
-                    }
-                });
-            })
-            .catch(error => console.error('Error fetching images:', error));
-    }
-
-    // Funzione per aprire il modal con l'immagine
-    function openModal(src) {
-        currentIndex = images.indexOf(src);
-        if (currentIndex === -1) {
-            console.error('Invalid image source:', src);
-            return;
-        }
-        modal.style.display = "block";
-        modalImage.src = src;
-    }
-
-    // Funzione per gestire la selezione delle immagini
-    function toggleSelection(img) {
-        const isSelected = selectedImages.has(img.src);
-        if (isSelected) {
-            selectedImages.delete(img.src);
-	    img.parentElement.classList.remove("selected");
-            img.classList.remove("selected");
-        } else {
-	    if (selectedImages.length > 4) {
-		alert("Puoi selezionare un massimo di 20 immagini per ogni singolo download.");
-		return;
-	    }
-            selectedImages.add(img.src);
-            img.classList.add("selected");
-	    img.parentElement.classList.add("selected");
-        }
-        updateDownloadButton();
-    }
-
-    // Funzione per aggiornare lo stato del pulsante di download
-    function updateDownloadButton() {
-        if (selectedImages.size > 0) {
-            downloadButton.classList.remove("disabled");
-            downloadButton.disabled = false;
-        } else {
-            downloadButton.classList.add("disabled");
-            downloadButton.disabled = true;
-        }
-    }
-
-    // Funzione per scaricare le immagini selezionate
-    function downloadSelectedImages() {
-        selectedImages.forEach(src => {
-            fetch(src)
-                .then(response => response.blob())
-                .then(blob => {
-                    const a = document.createElement("a");
-                    a.href = URL.createObjectURL(blob);
-                    a.download = src.substring(src.lastIndexOf("/") + 1); // Imposta il nome del file per il download
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(a.href); // Libera l'oggetto URL creato
-                })
-                .catch(error => console.error('Error downloading image:', error));
-        });
-    }
-
-    // Funzione per scaricare l'immagine visualizzata nel modal
-    function downloadImageInModal() {
-        const src = modalImage.src;
-        fetch(src)
-            .then(response => response.blob())
-            .then(blob => {
-                const a = document.createElement("a");
-                a.href = URL.createObjectURL(blob);
-                a.download = src.substring(src.lastIndexOf("/") + 1); // Imposta il nome del file per il download
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(a.href); // Libera l'oggetto URL creato
-            })
-            .catch(error => console.error('Error downloading image:', error));
-    }
-
-    // Evento per il pulsante "Seleziona"
-    selectButton.onclick = function () {
-        isSelecting = !isSelecting;
-        if (isSelecting) {
-            selectButton.textContent = "Annulla";
-            selectButton.classList.add("active");
-			downloadButton.style.display = "block";
-        } else {
-            selectButton.textContent = "Seleziona";
-            selectButton.classList.remove("active");
-			downloadButton.style.display = "none";
-            clearSelections();
-        }
-    };
-
-    // Funzione per deselezionare tutte le immagini
-    function clearSelections() {
-        selectedImages.clear();
-        const selectedElements = document.querySelectorAll(".gallery-image.selected");
-        selectedElements.forEach(img => {
-			img.classList.remove("selected");
-			img.parentElement.classList.remove("selected");
-		});
-        updateDownloadButton();
-    }
-
-    // Evento per il pulsante "Scarica"
-    downloadButton.onclick = function () {
-        if (selectedImages.size > 0) {
-            downloadSelectedImages();
-        }
-    };
-
-    // Evento per il pulsante "Scarica Immagine" nel modal
-    downloadModalButton.onclick = function () {
-        downloadImageInModal();
-    };
-
-    // Evento per chiudere il modal cliccando sulla "x"
-    closeModal.onclick = function () {
-        modal.style.display = "none";
-    };
-
-    // Evento per chiudere il modal cliccando sullo sfondo scuro
-    modal.onclick = function (event) {
-        if (event.target === modal || event.target === document.querySelectorAll(".modal-content-container")) {
-            modal.style.display = "none";
-        }
-    };
-
-    // Evento per il pulsante "Precedente" nel modal
-    prev.onclick = function () {
-        currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
-        modalImage.src = images[currentIndex];
-    };
-
-    // Evento per il pulsante "Successivo" nel modal
-    next.onclick = function () {
-        currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
-        modalImage.src = images[currentIndex];
-    };
-
     // Carica le immagini all'avvio della pagina
-    loadImages();
+    fetchImagesURLs();
 });
+
+// Funzione per caricare immagini dalla repository GitHub
+function fetchImagesURLs() {
+	const apiUrl = "https://api.github.com/repos/nicograzio/Sito_Matrimonio/contents/images";
+
+	fetch(apiUrl).then(response => response.json()).then(data => {
+			data.forEach((file) => {
+				if (file && (file.type.startsWith("image/") || /\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg|ico|heic|avif|raw|jfif)$/i.test(file.name)))
+					images.push(file.download_url);
+			});
+			loadImages(); // in questa posizione permette il caricamento delle prime foto
+			setSlideGallery();
+		})
+		.catch(error => console.error('Error fetching images:', error));
+}
+
+let currentIndexToLoad = 0;
+const imagesPerLoad = 1; // Numero di immagini da caricare per volta (da modificare in base al tipo di schermo)
+
+// Funzione per caricare immagini in blocchi
+function loadImages() {
+	if(currentIndexToLoad >= images.length) return;
+	// Carica il prossimo gruppo di immagini
+	for (let i = currentIndexToLoad; i < currentIndexToLoad + imagesPerLoad && i < images.length; i++) {
+		const div = document.createElement("div");
+		div.classList.add("img-container-div");
+		const img = document.createElement('img');
+		img.src = images[i];
+		img.classList.add("gallery-image");
+		img.loading = "lazy"; // Lazy loading
+		img.alt = images[i];		
+		img.addEventListener("click", function () {
+			if (isSelecting) {
+				toggleSelection(this);
+			} else {
+				openModal(this.src);
+			}
+		});
+		div.appendChild(img);
+		imageGallery.appendChild(div);
+	}
+	// Aggiorna l'indice corrente
+	currentIndexToLoad += imagesPerLoad;
+
+}
+
+// Carica le prime immagini al caricamento della pagina
+completeGallery.addEventListener('scroll', () => {
+    if (completeGallery.clientHeight + completeGallery.scrollTop >= completeGallery.scrollHeight - 10) {
+        loadImages();
+    }
+});
+
+/*let lastY = 0; // Posizione verticale dell'ultimo tocco
+
+imageGallery.addEventListener('touchstart', (event) => {
+    lastY = event.touches[0].clientY; // Salva la posizione iniziale
+});
+
+imageGallery.addEventListener('touchmove', (event) => {
+    const touch = event.touches[0];
+    const currentY = touch.clientY;
+
+    if (currentY < lastY) {
+        loadImages();
+    } else if (currentY > lastY) {
+        console.log('Scroll giù');
+    }
+
+    lastY = currentY; // Aggiorna la posizione per il prossimo movimento
+});
+
+imageGallery.addEventListener('wheel', (event) => {
+    console.log('Scroll evento rilevato:', event.deltaY);
+    if (event.deltaY < 0) {
+		console.log('Scroll Su');
+        loadImages();
+    } else {
+        console.log('Scroll giù');
+    }
+});*/
+
+// Funzione per aprire il modal con l'immagine
+function openModal(src) {
+	currentIndex = images.indexOf(src);
+	if (currentIndex === -1) {
+		console.error('Invalid image source:', src);
+		return;
+	}
+	modal.style.display = "block";
+	modalImage.src = src;
+}
+
+// Funzione per gestire la selezione delle immagini
+function toggleSelection(img) {
+	const isSelected = selectedImages.has(img.src);
+	if (isSelected) {
+		selectedImages.delete(img.src);
+		img.parentElement.classList.remove("selected");
+		img.classList.remove("selected");
+	} else {
+		if (selectedImages.size >= 20) {
+			alert("Puoi selezionare un massimo di 20 immagini per ogni singolo download.");
+			return;
+		}
+		selectedImages.add(img.src);
+		img.classList.add("selected");
+		img.parentElement.classList.add("selected");
+	}
+	updateDownloadButton();
+}
+
+// Funzione per aggiornare lo stato del pulsante di download
+function updateDownloadButton() {
+	if (selectedImages.size > 0) {
+		downloadButton.classList.remove("disabled");
+		downloadButton.disabled = false;
+	} else {
+		downloadButton.classList.add("disabled");
+		downloadButton.disabled = true;
+	}
+}
+
+// Funzione per scaricare le immagini selezionate
+function downloadSelectedImages() {
+	selectedImages.forEach(src => {
+		fetch(src)
+			.then(response => response.blob())
+			.then(blob => {
+				const a = document.createElement("a");
+				a.href = URL.createObjectURL(blob);
+				a.download = src.substring(src.lastIndexOf("/") + 1); // Imposta il nome del file per il download
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+				URL.revokeObjectURL(a.href); // Libera l'oggetto URL creato
+			})
+			.catch(error => console.error('Error downloading image:', error));
+	});
+}
+
+// Funzione per scaricare le immagini selezionate come un file ZIP
+function downloadSelectedImagesAsZip() {
+	const zip = new JSZip();
+	let imagePromises = [];
+	const selectedImagesArray = Array.from(selectedImages);
+	
+	// Itera sugli elementi del Set (convertito in array)
+	selectedImagesArray.forEach((src, index) => {
+		const imagePromise = fetch(src)
+			.then(response => response.blob())
+			.then(blob => {
+				const fileName = `image_${index + 1}${src.substring(src.lastIndexOf("."))}`;
+				zip.file(fileName, blob);
+			})
+			.catch(error => console.error('Error fetching image:', error));
+
+		imagePromises.push(imagePromise);
+	});
+
+	Promise.all(imagePromises)
+		.then(() => {
+			zip.generateAsync({ type: "blob" })
+				.then(content => {
+					const a = document.createElement("a");
+					a.href = URL.createObjectURL(content);
+					a.download = "images.zip";
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+					URL.revokeObjectURL(a.href);
+				})
+				.catch(error => console.error('Error generating zip:', error));
+		})
+		.catch(error => console.error('Error loading images:', error));
+}
+
+// Funzione per scaricare l'immagine visualizzata nel modal
+function downloadImageInModal() {
+	const src = modalImage.src;
+	fetch(src)
+		.then(response => response.blob())
+		.then(blob => {
+			const a = document.createElement("a");
+			a.href = URL.createObjectURL(blob);
+			a.download = src.substring(src.lastIndexOf("/") + 1); // Imposta il nome del file per il download
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(a.href); // Libera l'oggetto URL creato
+		})
+		.catch(error => console.error('Error downloading image:', error));
+}
+
+// Evento per il pulsante "Seleziona"
+selectButton.onclick = function () {
+	isSelecting = !isSelecting;
+	if (isSelecting) {
+		selectButton.textContent = "Annulla";
+		selectButton.classList.add("active");
+		downloadButton.style.display = "block";
+	} else {
+		selectButton.textContent = "Seleziona";
+		selectButton.classList.remove("active");
+		downloadButton.style.display = "none";
+		clearSelections();
+	}
+};
+
+// Funzione per deselezionare tutte le immagini
+function clearSelections() {
+	selectedImages.clear();
+	const selectedElements = document.querySelectorAll(".gallery-image.selected");
+	selectedElements.forEach(img => {
+		img.classList.remove("selected");
+		img.parentElement.classList.remove("selected");
+	});
+	updateDownloadButton();
+}
+
+// Evento per il pulsante "Scarica"
+downloadButton.onclick = function () {
+	if (selectedImages.size === 1) {
+		downloadSelectedImages();
+	}
+	else if (selectedImages.size > 1) {
+		downloadSelectedImagesAsZip();
+	}
+};
+
+// Evento per il pulsante "Scarica Immagine" nel modal
+downloadModalButton.onclick = function () {
+	downloadImageInModal();
+};
+
+// Evento per chiudere il modal cliccando sulla "x"
+closeModal.onclick = function () {
+	modal.style.display = "none";
+};
+
+// Evento per chiudere il modal cliccando sullo sfondo scuro
+modal.onclick = function (event) {
+	if (event.target === modal || event.target === document.querySelectorAll(".modal-content-container")) {
+		modal.style.display = "none";
+	}
+};
+
+// Evento per il pulsante "Precedente" nel modal
+prev.onclick = function () {
+	currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+	modalImage.src = images[currentIndex];
+};
+
+// Evento per il pulsante "Successivo" nel modal
+next.onclick = function () {
+	currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+	modalImage.src = images[currentIndex];
+};
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Imposta immagini galleria scorrevole
+const slidePhotos = document.querySelectorAll('.posterSlide');
+function setSlideGallery() {
+	const slidePhotosSrc = selectPhotos(images);
+	slidePhotos.forEach((slidePhoto, indexSlidePhoto) => {
+		if(indexSlidePhoto > slidePhotosSrc.length-1) indexSlidePhoto =1;
+		slidePhoto.src = slidePhotosSrc[indexSlidePhoto];
+	});
+}
+
+function mixArray(array) {
+    // Mescola l'array utilizzando l'algoritmo Fisher-Yates
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Scambia gli elementi
+    }
+    return array;
+}
+
+function selectPhotos(array, photoToSelect = slidePhotos.length) {
+    // Mescola l'array originale
+    const arrayMixed = mixArray([...array]); // Crea una copia dell'array e lo mescola
+    // Seleziona fino al numero richiesto di elementi
+    return arrayMixed.slice(0, Math.min(photoToSelect, arrayMixed.length));
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //Gestione Cookies
 window.onload = function() {
@@ -536,3 +657,4 @@ function loadAnalytics() {
 	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
+/*----------------------------------------------------------------------------*/
