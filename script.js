@@ -1,8 +1,8 @@
 // Imposta la data del matrimonio
 var weddingDate = new Date("Sep 13, 2025 00:00:00").getTime();
+var now = new Date().getTime();
+var distance = weddingDate - now;
 var countdown = setInterval(function() {
-	var now = new Date().getTime();
-	var distance = weddingDate - now;
 	if (distance > 0) {
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -91,7 +91,7 @@ document.getElementById('reservation-form').addEventListener('submit', async fun
     };
 	
     try {
-        const response = await fetch('https://matrimonio-nicholas-e-carlott.netlify.app/.netlify/functions/submit-reservation', {
+        const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/submit-reservation', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
@@ -185,23 +185,22 @@ window.addEventListener('resize', updateSwiperSlidesPerView);
 
 // Caricamento immagini
 document.getElementById('file').addEventListener('change', function() {
-    const fileInput = this;
-    const fileNameDisplay = document.getElementById('file-name');
+	const fileNameDisplay = document.getElementById('file-name');
+	const fileInput = this;
 	const buttonSubmitPhotos = document.getElementById('submit-photos');
-
-    if (fileInput.files.length === 1) {
-        // Se è stato selezionato un solo file, mostra il nome del file
-        fileNameDisplay.textContent = fileInput.files[0].name;
+	if (fileInput.files.length === 1) {
+		// Se è stato selezionato un solo file, mostra il nome del file
+		fileNameDisplay.textContent = fileInput.files[0].name;
 		buttonSubmitPhotos.disabled = false;
-    } else if (fileInput.files.length > 1) {
-        // Se sono stati selezionati più file, mostra il numero di file
-        fileNameDisplay.textContent = fileInput.files.length + " file selezionati";
+	} else if (fileInput.files.length > 1) {
+		// Se sono stati selezionati più file, mostra il numero di file
+		fileNameDisplay.textContent = fileInput.files.length + " file selezionati";
 		buttonSubmitPhotos.disabled = false;
-    } else {
-        // Se non è stato selezionato alcun file
-        fileNameDisplay.textContent = "";
+	} else {
+		// Se non è stato selezionato alcun file
+		fileNameDisplay.textContent = "";
 		buttonSubmitPhotos.disabled = true;
-    }
+	}
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -226,7 +225,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
 		});
 	}
 	try {
-		const response = await fetch('https://matrimonio-nicholas-e-carlott.netlify.app/.netlify/functions/upload-to-github', {
+		const response = await fetch('https://matrimonio-nicholas-e-carlotta.netlify.app/.netlify/functions/upload-to-github', {
 			method: 'POST',
 			body: JSON.stringify({ files: fileArray }),
 			headers: { 'Content-Type': 'application/json' }
@@ -299,9 +298,17 @@ let isSelecting = false;
 let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
+	// Previeni il click sul pulsante di caricamento delle immagini
+	if (distance > 0) {
+		document.getElementById('upload-form').addEventListener('click', async function(event) {
+			event.preventDefault();
+			alert('Il caricamento delle foto sarà consentito solo dal giorno della cerimonia!\nRiprova più tardi.');
+		});
+	}
+	// Gestione dei cookie
+	checkCookieAcceptance();
     // Carica le immagini all'avvio della pagina
     fetchImagesURLs();
-	checkCookieAcceptance();
 });
 
 // Funzione per caricare immagini dalla repository GitHub
