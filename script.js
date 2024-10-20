@@ -378,6 +378,7 @@ function openModal(src) {
 	}
 	modal.style.display = "block";
 	modalImage.src = src;
+	completeGallery.style.overflowY = 'hidden';
 }
 
 // Funzione per gestire la selezione delle immagini
@@ -525,12 +526,14 @@ downloadModalButton.onclick = function () {
 // Evento per chiudere il modal cliccando sulla "x"
 closeModal.onclick = function () {
 	modal.style.display = "none";
+	completeGallery.style.overflowY = 'auto';
 };
 
 // Evento per chiudere il modal cliccando sullo sfondo scuro
 modal.onclick = function (event) {
 	if (event.target === modal || event.target === document.querySelectorAll(".modal-content-container")) {
 		modal.style.display = "none";
+		completeGallery.style.overflowY = 'auto';
 	}
 };
 
