@@ -362,6 +362,11 @@ section {
 	position: relative;
 }
 
+#map {
+	padding: 5px;
+	padding-top: 15px;
+}
+
 .mapouter {
 	position: relative;
 	text-align: right;
