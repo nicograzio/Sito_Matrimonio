@@ -17,7 +17,7 @@ body.gallery-active {
 }
 
 h2 {
-	font-size: clamp(20px, 5.2vw, 56px);
+	font-size: clamp(30px, 5.2vw, 60px);
 	margin-bottom: 20px;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 	text-align: center;
@@ -25,7 +25,7 @@ h2 {
 
 p, ul, form {
 	margin: 0 auto;
-	font-size: clamp(14px, 4vw, 50px);
+	font-size: clamp(22px, 4vw, 52px);
 	text-align: center;
 	list-style-position: inside;
 }
@@ -41,7 +41,6 @@ input, textarea, button {
 	padding: 15px;
 	border-radius: 8px;
 	border: none;
-	font-size: 1em;
 	outline: none;
 	font-family: 'Dancing Script', cursive; /* Cambia il font */
 }
@@ -60,10 +59,15 @@ button, a {
 	color: white;
 	background-color: #333;
 	border: none;
-	padding: 10px 20px;
 	text-decoration: none;
 	transition: background-color 0.3s ease;
 	font-family: 'Dancing Script', cursive;
+}
+
+button {
+	padding: 10px 15px;
+	cursor: pointer;
+	font-size: clamp(22px, 4vw, 52px);
 }
 
 button:hover, a:hover {
@@ -435,7 +439,7 @@ section {
 #file-label {
 	background-color: #333;
 	color: white;
-	padding: 10px 20px;
+	padding: 10px 15px;
 	border-radius: 8px;
 	cursor: pointer;
 	text-align: center;
@@ -444,10 +448,6 @@ section {
 
 #file-label:hover {
 	background-color: #555;
-}
-
-#submit-photos {
-	font-size: 22px;
 }
 /*-------------------------------------------*/
 
@@ -551,16 +551,7 @@ section {
 		height: auto;
 	}
 	
-	/* Pulsanti e link */
-	button, a {
-		padding: 10px 15px;
-	}
-	
 	#time {
-		font-size: 1em;
-	}
-	
-	.contact {
 		font-size: 1em;
 	}
 }
@@ -693,13 +684,6 @@ section {
     right: 10px;
 	display: flex;
 	z-index: 11;
-}
-
-button {
-	padding: 10px 15px;
-	margin: 0 5px;
-	cursor: pointer;
-	font-size: clamp(14px, 4vw, 50px);
 }
 
 /* Stile per il modal */
