@@ -418,6 +418,11 @@ function downloadSelectedImages() {
 				a.click();
 				document.body.removeChild(a);
 				URL.revokeObjectURL(a.href); // Libera l'oggetto URL creato
+				// Rimuovi spinner nel icona del download
+				document.getElementById("downloadIcon").classList.remove("fa-spinner");
+				document.getElementById("downloadIcon").classList.add("fa-download");
+				downloadButton.classList.remove("disabled");
+				downloadButton.disabled = false;
 			})
 			.catch(error => console.error('Error downloading image:', error));
 	});
@@ -453,6 +458,11 @@ function downloadSelectedImagesAsZip() {
 					a.click();
 					document.body.removeChild(a);
 					URL.revokeObjectURL(a.href);
+					// Rimuovi spinner nel icona del download
+					document.getElementById("downloadIcon").classList.remove("fa-spinner");
+					document.getElementById("downloadIcon").classList.add("fa-download");
+					downloadButton.classList.remove("disabled");
+					downloadButton.disabled = false;
 				})
 				.catch(error => console.error('Error generating zip:', error));
 		})
@@ -504,6 +514,12 @@ function clearSelections() {
 
 // Evento per il pulsante "Scarica"
 downloadButton.onclick = function () {
+	// aggiungi spinner nel icon del download e disabilita il tasto
+	document.getElementById("downloadIcon").classList.remove("fa-download");
+	document.getElementById("downloadIcon").classList.add("fa-spinner");
+	downloadButton.classList.add("disabled");
+	downloadButton.disabled = true;
+	// chimata alle funzioni per scaricare le immagini
 	if (selectedImages.size === 1) {
 		downloadSelectedImages();
 	}
