@@ -135,9 +135,9 @@ nav ul li {
 }
 
 nav ul li a {
-	font-size: 1.2em;
+	font-size: 35px;
 	color: white;
-	padding: 10px 15px;
+	padding: 0px 15px;
 	display: block;
 	position: relative;
 	z-index: 1;
@@ -493,14 +493,19 @@ section {
 #cookie-banner {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: calc(100% - 16px);
     background-color: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(2px);
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 8px;
+	font-size: clamp(16px, 2vw, 18px);
     z-index: 5000;
     display: none; /* Il banner apparirà solo se l'utente non ha scelto */
+}
+
+#cookie-banner button {
+    font-size: 10px;
 }
 /*-------------------------------------------*/
 
