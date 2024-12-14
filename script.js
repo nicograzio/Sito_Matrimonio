@@ -27,6 +27,17 @@ var countdown = setInterval(function() {
 // Autoplay video
 let video = document.getElementById('bg-video');
 video.play();
+
+
+const audioPlayer = document.getElementById('audioPlayer');
+  window.addEventListener('click', () => {
+    audioPlayer.muted = false;
+    audioPlayer.play();
+  });
+/*
+const audioPlayer = document.getElementById('audioPlayer');
+//audioPlayer.muted = false; // Rimuovi il mute
+audioPlayer.play();*/
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Aggiungi animazioni al caricamento delle sezioni
