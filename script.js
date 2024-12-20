@@ -28,16 +28,16 @@ var countdown = setInterval(function() {
 let video = document.getElementById('bg-video');
 video.play();
 
-
-const audioPlayer = document.getElementById('audioPlayer');
-  window.addEventListener('click', () => {
-    audioPlayer.muted = false;
-    audioPlayer.play();
-  });
-/*
-const audioPlayer = document.getElementById('audioPlayer');
-//audioPlayer.muted = false; // Rimuovi il mute
-audioPlayer.play();*/
+const icon = document.getElementById('icon');
+let isPlaying = false;
+const playPauseButton = document.getElementById('playPauseButton');
+playPauseButton.addEventListener('click', () => {
+	audioPlayer.muted = isPlaying;
+	isPlaying = !isPlaying;
+	// Toggle icon between play and pause
+	icon.innerHTML = isPlaying ? '<path d="M6 19h4V5H6zm8-14v14h4V5z"/>' : '<path d="M8 5v14l11-7z"/>';
+	audioPlayer.play();
+});
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Aggiungi animazioni al caricamento delle sezioni

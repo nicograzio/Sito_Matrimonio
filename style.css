@@ -212,6 +212,40 @@ nav ul hr {
 }
 /*-------------------------------------------*/
 
+/* Stile Del pulsante Play Music */
+#playPauseButton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: #555555EE;
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 9999;
+	transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#playPauseButton:hover {
+	background: #222222EE;
+}
+
+#playPauseButton:active {
+	transform: scale(0.9);
+}
+
+#playPauseButton svg {
+	fill: white;
+	width: 26px;
+	height: 26px;
+}
+/*-------------------------------------------*/
+
 /* Stile comune delle sezioni */
 section {
 	padding: 100px 20px;
