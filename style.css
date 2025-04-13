@@ -48,6 +48,7 @@ input, textarea, button {
 input, textarea {
 	width: 100%;
 	max-width: 500px;
+	font-size: clamp(20px, 1vw, 34px);
 }
 
 input::placeholder, textarea::placeholder {
@@ -318,6 +319,56 @@ section {
 #details {
 	background: rgba(253, 253, 253, 1);
 	color: #333;
+}
+
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-item {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background: #fdfdfd33;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin: auto;
+  backdrop-filter: blur(5px);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 40px;
+}
+
+.detail-content {
+  margin-top: 10px;
+  font-size: clamp(20px, 2vw, 34px);
+  color: #444;
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease, opacity 0.8s ease;
+  opacity: 0;
+}
+
+.detail-content ul {
+  padding: 0;
+  font-size: clamp(20px, 3vw, 34px);
+  text-align: left;
+}
+
+.detail-item.in-view .detail-content {
+  max-height: 300px;
+  opacity: 1;
 }
 /*-------------------------------------------*/
 

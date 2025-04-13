@@ -88,6 +88,33 @@ document.querySelector('nav ul').addEventListener('click', function() {
 });
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// Animazione sezione dettagli
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".detail-item");
+
+    function updateVisibility() {
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+        const isInUpperHalf = rect.top < window.innerHeight / 2;
+
+        if (isFullyVisible && isInUpperHalf) {
+          item.classList.add("in-view");
+        } else {
+          item.classList.remove("in-view");
+        }
+      });
+    }
+
+    // Aggiorna la visibilità su scroll e resize
+    window.addEventListener("scroll", updateVisibility);
+    window.addEventListener("resize", updateVisibility);
+
+    // Esegui al primo caricamento
+    updateVisibility();
+  });
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Invio dati del form per la prenotazione
 document.getElementById('reservation-form').addEventListener('submit', async function(event) {
     event.preventDefault();
