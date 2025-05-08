@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
+const { Octokit } = require('@octokit/rest');
 
 exports.handler = async function(event, context) {
-    const { Octokit } = await import("@octokit/rest");
-
+    
     // Imposta gli header CORS
     const headers = {
         'Access-Control-Allow-Origin': '*',
