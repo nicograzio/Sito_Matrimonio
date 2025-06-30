@@ -444,6 +444,11 @@ section {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
+
+#intestatario {
+	font-size: clamp(15px, 2.5vw, 30px);
+	text-align: left;
+}
 /*-------------------------------------------*/
 
 /* LOCATION */

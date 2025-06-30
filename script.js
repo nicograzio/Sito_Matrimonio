@@ -95,10 +95,8 @@ document.querySelector('nav ul').addEventListener('click', function() {
     function updateVisibility() {
       items.forEach(item => {
         const rect = item.getBoundingClientRect();
-        const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
         const isInUpperHalf = rect.top < window.innerHeight / 2;
-
-        if (isFullyVisible && isInUpperHalf) {
+        if (isInUpperHalf) {
           item.classList.add("in-view");
         } else {
           item.classList.remove("in-view");
