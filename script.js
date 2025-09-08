@@ -341,6 +341,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			alert('Il caricamento delle foto sarà consentito solo dal giorno della cerimonia!\nRiprova più tardi.');
 		});
 	}
+	if (distance < 86400000*7) {
+		document.getElementById('reservation-form').addEventListener('click', async function(event) {
+			event.preventDefault();
+			alert('Non è più possibile inviare la prenotazione. Per esigenza particolari contattarci telefonicamente.');
+		});
+	}
 	// Gestione dei cookie
 	checkCookieAcceptance();
     // Carica le immagini all'avvio della pagina
