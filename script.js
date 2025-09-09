@@ -344,7 +344,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	if (distance < 86400000*7) {
 		document.getElementById('reservation-form').addEventListener('click', async function(event) {
 			event.preventDefault();
-			alert('Non è più possibile inviare la prenotazione. Per esigenza particolari contattarci telefonicamente.');
+			alert('Non è più possibile inviare la prenotazione. Per esigenze particolari contattarci telefonicamente!');
 		});
 	}
 	// Gestione dei cookie
